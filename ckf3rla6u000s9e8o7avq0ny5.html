@@ -1,0 +1,503 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+  
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ejpark78.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="kubectx, kubens  kubectx  123456789kubectl config current-context kubectl config rename-context kubernetes-admin@kubernetes nlp-k8s kubectl config set-context nlp-k8s --namespace=crawler kubectl conf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="쿠버네티스 도구 모음">
+<meta property="og:url" content="https://ejpark78.github.io/ckf3rla6u000s9e8o7avq0ny5.html">
+<meta property="og:site_name" content="오늘은 뭘 배우셨나요?">
+<meta property="og:description" content="kubectx, kubens  kubectx  123456789kubectl config current-context kubectl config rename-context kubernetes-admin@kubernetes nlp-k8s kubectl config set-context nlp-k8s --namespace=crawler kubectl conf">
+<meta property="og:locale">
+<meta property="og:image" content="https://k8slens.dev/images/header-lens.png">
+<meta property="og:image" content="https://github.com/derailed/k9s/raw/master/assets/k9s.png">
+<meta property="og:image" content="https://octant.dev/img/posts/2019/08/12/screenshot-1.png">
+<meta property="article:published_time" content="2020-08-25T04:45:59.000Z">
+<meta property="article:modified_time" content="2020-09-15T09:10:19.509Z">
+<meta property="article:author" content="Park Eunjin">
+<meta property="article:tag" content="쿠버네티스">
+<meta property="article:tag" content="도구 모음">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://k8slens.dev/images/header-lens.png">
+
+
+<link rel="canonical" href="https://ejpark78.github.io/ckf3rla6u000s9e8o7avq0ny5.html">
+
+
+<script data-pjax="" class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'infra'
+  };
+</script>
+
+  <title>쿠버네티스 도구 모음 | 오늘은 뭘 배우셨나요?</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css');loadCss('//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">오늘은 뭘 배우셨나요?</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">나도 블로그가 있다!!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">59</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">61</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">52</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#kubectx-kubens"><span class="nav-number">1.</span> <span class="nav-text"> kubectx, kubens</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stern"><span class="nav-number">2.</span> <span class="nav-text"> stern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k8s-lens"><span class="nav-number">3.</span> <span class="nav-text"> k8s lens</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%84%A4%EC%B9%98"><span class="nav-number">3.1.</span> <span class="nav-text"> 설치</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%8B%A8%EC%B6%95-%EC%95%84%EC%9D%B4%EC%BD%98-%EC%83%9D%EC%84%B1"><span class="nav-number">3.2.</span> <span class="nav-text"> 단축 아이콘 생성</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k9s-cli"><span class="nav-number">4.</span> <span class="nav-text"> k9s cli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#octant"><span class="nav-number">5.</span> <span class="nav-text"> octant</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B0%B8%EA%B3%A0"><span class="nav-number">6.</span> <span class="nav-text"> 참고</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Park Eunjin</p>
+  <div class="site-description" itemprop="description">적자생존!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla6u000s9e8o7avq0ny5.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          쿠버네티스 도구 모음
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-25 13:45:59" itemprop="dateCreated datePublished" datetime="2020-08-25T13:45:59+09:00">2020-08-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-09-15 18:10:19" itemprop="dateModified" datetime="2020-09-15T18:10:19+09:00">2020-09-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">쿠버네티스</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/%EB%8F%84%EA%B5%AC-%EB%AA%A8%EC%9D%8C/" itemprop="url" rel="index"><span itemprop="name">도구 모음</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="kubectx-kubens"><a class="markdownIt-Anchor" href="#kubectx-kubens"></a> kubectx, kubens</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ahmetb/kubectx">kubectx</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kubectl config current-context</span><br><span class="line"> </span><br><span class="line">kubectl config rename-context kubernetes-admin@kubernetes nlp-k8s</span><br><span class="line"> </span><br><span class="line">kubectl config <span class="built_in">set</span>-context nlp-k8s --namespace=crawler</span><br><span class="line"> </span><br><span class="line">kubectl config get-contexts $(kubectl config current-context)</span><br><span class="line"> </span><br><span class="line">kubectl api-versions</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="stern"><a class="markdownIt-Anchor" href="#stern"></a> stern</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/wercker/stern">stern</a></li>
+</ul>
+<h2 id="k8s-lens"><a class="markdownIt-Anchor" href="#k8s-lens"></a> k8s lens</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://k8slens.dev/">k8slens</a></li>
+</ul>
+<p><img src="https://k8slens.dev/images/header-lens.png" alt="logo"></p>
+<h3 id="설치"><a class="markdownIt-Anchor" href="#설치"></a> 설치</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/lensapp/lens/releases/">releases repo</a></li>
+<li><a target="_blank" rel="noopener" href="https://opensource.com/article/20/6/kubernetes-lens">Manage your Kubernetes cluster with Lens</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/lensapp/lens/releases/download/v3.4.0/Lens-3.4.0.AppImage</span><br><span class="line"></span><br><span class="line">chmod +x Lens-3.4.0.AppImage</span><br><span class="line">sudo mv Lens-3.4.0.AppImage ~/usr/k8s/lens</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="단축-아이콘-생성"><a class="markdownIt-Anchor" href="#단축-아이콘-생성"></a> 단축 아이콘 생성</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOS | sudo tee /usr/share/applications/lens.desktop</span><br><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Type=Application</span><br><span class="line">Name=lens</span><br><span class="line">Icon=/home/ejpark/usr/k8s/lens.png</span><br><span class="line">Exec=<span class="string">"/home/ejpark/usr/k8s/lens"</span></span><br><span class="line">Comment=Lens desktop entry</span><br><span class="line">Categories=Development;</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">StartupNotify=<span class="literal">true</span></span><br><span class="line">EOS</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="k9s-cli"><a class="markdownIt-Anchor" href="#k9s-cli"></a> k9s cli</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/derailed/k9s">k9s</a></li>
+</ul>
+<p><img src="https://github.com/derailed/k9s/raw/master/assets/k9s.png" alt="logo"></p>
+<h2 id="octant"><a class="markdownIt-Anchor" href="#octant"></a> octant</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://octant.dev/">octnt</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/vmware-tanzu/octant">repo</a></li>
+</ul>
+<p><img src="https://octant.dev/img/posts/2019/08/12/screenshot-1.png" alt="logo"></p>
+<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://morioh.com/p/d2d9a70ed4df">Kubetools – Curated List of Kubernetes Tools</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/cloudnativelabs/kube-shell">Kubernetes shell: An integrated shell for working with the Kubernetes</a></li>
+<li><a target="_blank" rel="noopener" href="https://morioh.com/p/5588c3848751?f=5c224490c513a556c9042463">8 Kubernetes Tips and Tricks</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ibm.com/cloud/blog/8-kubernetes-tips-and-tricks">8 Kubernetes Tips and Tricks | IBM</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/" rel="tag"># 쿠버네티스</a>
+              <a href="/tags/%EB%8F%84%EA%B5%AC-%EB%AA%A8%EC%9D%8C/" rel="tag"># 도구 모음</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ckf3rla74000y9e8o162obz4o.html" rel="prev" title="고립망(DMZ)에 lens metrics 설치 방법">
+                  <i class="fa fa-chevron-left"></i> 고립망(DMZ)에 lens metrics 설치 방법
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ckf3rla8p003g9e8oaufb30er.html" rel="next" title="쿠버네티스 입문 2019">
+                  쿠버네티스 입문 2019 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Park Eunjin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+<script src="/bundle.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script></body></html>

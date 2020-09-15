@@ -1,0 +1,614 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+  
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ejpark78.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="네임스페이스 생성  nexus3 가 실행될 네임스페이스를 생성한다.  1kubectl create ns nexus3  Nexus3 설치  Nexus3 StatefulSet 정의  nexus3의 StatefulSet 정의  123456789101112131415161718192021222324252627282930313233343536373839404142">
+<meta property="og:type" content="article">
+<meta property="og:title" content="쿠버네티스 기반 인프라 설치">
+<meta property="og:url" content="https://ejpark78.github.io/ckf3rla6s000r9e8o6w6m3hyr.html">
+<meta property="og:site_name" content="오늘은 뭘 배우셨나요?">
+<meta property="og:description" content="네임스페이스 생성  nexus3 가 실행될 네임스페이스를 생성한다.  1kubectl create ns nexus3  Nexus3 설치  Nexus3 StatefulSet 정의  nexus3의 StatefulSet 정의  123456789101112131415161718192021222324252627282930313233343536373839404142">
+<meta property="og:locale">
+<meta property="og:image" content="https://ejpark78.github.io/image/nexus3/anonymous-access.png">
+<meta property="article:published_time" content="2020-08-12T23:46:04.000Z">
+<meta property="article:modified_time" content="2020-08-28T20:51:28.140Z">
+<meta property="article:author" content="Park Eunjin">
+<meta property="article:tag" content="설치 기록">
+<meta property="article:tag" content="nexus3">
+<meta property="article:tag" content="mongodb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ejpark78.github.io/image/nexus3/anonymous-access.png">
+
+
+<link rel="canonical" href="https://ejpark78.github.io/ckf3rla6s000r9e8o6w6m3hyr.html">
+
+
+<script data-pjax="" class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'infra'
+  };
+</script>
+
+  <title>쿠버네티스 기반 인프라 설치 | 오늘은 뭘 배우셨나요?</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css');loadCss('//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">오늘은 뭘 배우셨나요?</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">나도 블로그가 있다!!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">59</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">61</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">52</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%84%A4%EC%9E%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EC%83%9D%EC%84%B1"><span class="nav-number">1.</span> <span class="nav-text"> 네임스페이스 생성</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nexus3-%EC%84%A4%EC%B9%98"><span class="nav-number">2.</span> <span class="nav-text"> Nexus3 설치</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nexus3-statefulset-%EC%A0%95%EC%9D%98"><span class="nav-number">2.1.</span> <span class="nav-text"> Nexus3 StatefulSet 정의</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nexus3-%EC%B4%88%EA%B8%B0-%EB%B9%84%EB%B0%80-%EB%B2%88%ED%98%B8"><span class="nav-number">2.2.</span> <span class="nav-text"> nexus3 초기 비밀 번호</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongo-db-%EC%84%A4%EC%B9%98"><span class="nav-number">3.</span> <span class="nav-text"> mongo db 설치</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ingress-controller-%EC%A0%95%EC%9D%98"><span class="nav-number">4.</span> <span class="nav-text"> ingress-controller 정의</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ingress-%EC%84%A4%EC%A0%95"><span class="nav-number">5.</span> <span class="nav-text"> ingress 설정</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ingress-dns-%EB%A7%B4%ED%95%91-%ED%99%95%EC%9D%B8"><span class="nav-number">6.</span> <span class="nav-text"> ingress DNS 맴핑 확인</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#etchosts-%EC%97%90-dns-%EB%93%B1%EB%A1%9D"><span class="nav-number">7.</span> <span class="nav-text"> /etc/hosts 에 DNS 등록</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-%EC%84%A4%EC%A0%95"><span class="nav-number">8.</span> <span class="nav-text"> ssl 설정</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-login-%EB%B0%A9%EB%B2%95"><span class="nav-number">9.</span> <span class="nav-text"> docker login 방법</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apt-%EB%A5%BC-%EC%9C%84%ED%95%9C-anonymous-access-%ED%99%9C%EC%84%B1%ED%99%94"><span class="nav-number">10.</span> <span class="nav-text"> apt 를 위한 Anonymous Access 활성화</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apt-option"><span class="nav-number">11.</span> <span class="nav-text"> apt option</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%82%AC%EC%9A%A9"><span class="nav-number">12.</span> <span class="nav-text"> npm 저장소 사용</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9D%B4%EC%8A%88"><span class="nav-number">13.</span> <span class="nav-text"> 이슈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-registry-push-%EC%98%A4%EB%A5%98"><span class="nav-number">14.</span> <span class="nav-text"> docker registry push 오류</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B0%B8%EA%B3%A0"><span class="nav-number">15.</span> <span class="nav-text"> 참고</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Park Eunjin</p>
+  <div class="site-description" itemprop="description">적자생존!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla6s000r9e8o6w6m3hyr.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          쿠버네티스 기반 인프라 설치
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-13 08:46:04" itemprop="dateCreated datePublished" datetime="2020-08-13T08:46:04+09:00">2020-08-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-29 05:51:28" itemprop="dateModified" datetime="2020-08-29T05:51:28+09:00">2020-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/" itemprop="url" rel="index"><span itemprop="name">설치 기록</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/nexus3/" itemprop="url" rel="index"><span itemprop="name">nexus3</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/nexus3/mongodb/" itemprop="url" rel="index"><span itemprop="name">mongodb</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="네임스페이스-생성"><a class="markdownIt-Anchor" href="#네임스페이스-생성"></a> 네임스페이스 생성</h2>
+<ul>
+<li>nexus3 가 실행될 네임스페이스를 생성한다.</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create ns nexus3</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="nexus3-설치"><a class="markdownIt-Anchor" href="#nexus3-설치"></a> Nexus3 설치</h2>
+<h3 id="nexus3-statefulset-정의"><a class="markdownIt-Anchor" href="#nexus3-statefulset-정의"></a> Nexus3 StatefulSet 정의</h3>
+<ul>
+<li>nexus3의 StatefulSet 정의</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">|</span> <span class="string">tee</span> <span class="string">nexus3.st.yaml</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StatefulSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nexus3</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">nexus3</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">nexus3</span></span><br><span class="line">  <span class="attr">serviceName:</span> <span class="string">nexus3</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">nexus3</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">restartPolicy:</span> <span class="string">Always</span></span><br><span class="line">      <span class="attr">securityContext:</span></span><br><span class="line">        <span class="attr">runAsUser:</span> <span class="number">0</span></span><br><span class="line">        <span class="attr">runAsGroup:</span> <span class="number">0</span></span><br><span class="line">        <span class="attr">fsGroup:</span> <span class="number">0</span></span><br><span class="line">      <span class="attr">hostNetwork:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">default</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">sonatype/nexus3:latest</span></span><br><span class="line">          <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">          <span class="attr">resources:</span></span><br><span class="line">            <span class="attr">requests:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">4000m</span></span><br><span class="line">            <span class="attr">limits:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">5000m</span></span><br><span class="line">          <span class="attr">volumeMounts:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/nexus-data</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">data-vol</span></span><br><span class="line">  <span class="attr">volumeClaimTemplates:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">metadata:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">data-vol</span></span><br><span class="line">      <span class="attr">spec:</span></span><br><span class="line">        <span class="attr">accessModes:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">        <span class="attr">volumeMode:</span> <span class="string">Filesystem</span></span><br><span class="line">        <span class="attr">resources:</span></span><br><span class="line">          <span class="attr">requests:</span></span><br><span class="line">            <span class="attr">storage:</span> <span class="string">80Gi</span></span><br><span class="line">        <span class="attr">storageClassName:</span> <span class="string">"rbd"</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">nexus3.st.yaml</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>서비스 정의: nexus3.svc.yaml</p>
+</li>
+<li>
+<p>헤드리스 서비스 정의</p>
+<ul>
+<li>헤드리스인 경우 (ingress 를 사용하는 경우)<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line">  <span class="attr">clusterIP:</span> <span class="string">None</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>외부로 오픈하는 경우:<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LoadBalancer</span></span><br><span class="line">  <span class="attr">externalIPs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">${EXTERNAL_IP}</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">|</span> <span class="string">tee</span> <span class="string">nexus3.svc.yaml</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nexus3</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">nexus3</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line">  <span class="attr">clusterIP:</span> <span class="string">None</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">nexus3</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line">      <span class="attr">targetPort:</span> <span class="number">8081</span></span><br><span class="line">      <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">nexus3</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">5000</span></span><br><span class="line">      <span class="attr">targetPort:</span> <span class="number">5000</span></span><br><span class="line">      <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">registry</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">nexus3.svc.yaml</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="nexus3-초기-비밀-번호"><a class="markdownIt-Anchor" href="#nexus3-초기-비밀-번호"></a> nexus3 초기 비밀 번호</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> pod/nexus3-0 -- cat /nexus-data/admin.password</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="mongo-db-설치"><a class="markdownIt-Anchor" href="#mongo-db-설치"></a> mongo db 설치</h2>
+<ul>
+<li>mongo db의 StatefulSet 정의</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">|</span> <span class="string">tee</span> <span class="string">mongo.st.yaml</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StatefulSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mongo</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">mongo</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">mongo</span></span><br><span class="line">  <span class="attr">serviceName:</span> <span class="string">mongo</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">mongo</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">restartPolicy:</span> <span class="string">Always</span></span><br><span class="line">      <span class="attr">terminationGracePeriodSeconds:</span> <span class="number">10</span></span><br><span class="line">      <span class="attr">securityContext:</span></span><br><span class="line">        <span class="attr">runAsUser:</span> <span class="number">0</span></span><br><span class="line">        <span class="attr">runAsGroup:</span> <span class="number">0</span></span><br><span class="line">        <span class="attr">fsGroup:</span> <span class="number">0</span></span><br><span class="line">      <span class="attr">hostNetwork:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">default</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">mongo:latest</span></span><br><span class="line">          <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">          <span class="attr">resources:</span></span><br><span class="line">            <span class="attr">requests:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">2000m</span></span><br><span class="line">            <span class="attr">limits:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">3000m</span></span><br><span class="line">          <span class="attr">command:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">mongod</span></span><br><span class="line">          <span class="attr">args:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">--bind_ip=0.0.0.0</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">--port=27017</span></span><br><span class="line">          <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">27017</span></span><br><span class="line">          <span class="attr">readinessProbe:</span></span><br><span class="line">            <span class="attr">exec:</span></span><br><span class="line">              <span class="attr">command:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">mongo</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">--eval</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">db.adminCommand('ping')</span></span><br><span class="line">            <span class="attr">failureThreshold:</span> <span class="number">3</span></span><br><span class="line">            <span class="attr">initialDelaySeconds:</span> <span class="number">5</span></span><br><span class="line">            <span class="attr">periodSeconds:</span> <span class="number">10</span></span><br><span class="line">            <span class="attr">successThreshold:</span> <span class="number">1</span></span><br><span class="line">            <span class="attr">timeoutSeconds:</span> <span class="number">1</span></span><br><span class="line">          <span class="attr">volumeMounts:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/data/db</span></span><br><span class="line">              <span class="attr">name:</span> <span class="string">data-vol</span></span><br><span class="line">  <span class="attr">volumeClaimTemplates:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">metadata:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">data-vol</span></span><br><span class="line">      <span class="attr">spec:</span></span><br><span class="line">        <span class="attr">accessModes:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">        <span class="attr">volumeMode:</span> <span class="string">Filesystem</span></span><br><span class="line">        <span class="attr">resources:</span></span><br><span class="line">          <span class="attr">requests:</span></span><br><span class="line">            <span class="attr">storage:</span> <span class="string">30Gi</span></span><br><span class="line">        <span class="attr">storageClassName:</span> <span class="string">"rbd"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mongo</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">mongo</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line">  <span class="attr">clusterIP:</span> <span class="string">None</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">mongo</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">27017</span></span><br><span class="line">      <span class="attr">targetPort:</span> <span class="number">27017</span></span><br><span class="line">      <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">mongo</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">mongo.st.yaml</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>참고:
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zzsza.github.io/development/2019/01/27/kubernetes-statefulset/">Kubernetes StatefulSet를 사용해 MongoDB 실행하기</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.shovelman.dev/950">Kubernetes에 MongoDB 설정</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="ingress-controller-정의"><a class="markdownIt-Anchor" href="#ingress-controller-정의"></a> ingress-controller 정의</h2>
+<ul>
+<li>ingress-controller 를 다운로드 받는다.</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/baremetal/deploy.yaml -O ingress-controller.yaml</span><br><span class="line"></span><br><span class="line">kubectl apply -f ingress-controller.yaml</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="ingress-설정"><a class="markdownIt-Anchor" href="#ingress-설정"></a> ingress 설정</h2>
+<ul>
+<li>dns ssl secret 생성</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">DNS=mydns.com</span><br><span class="line">SECRET_NAME=web-ssl</span><br><span class="line"></span><br><span class="line"><span class="comment"># SSL 인증서 비밀번호 제거</span></span><br><span class="line">openssl rsa -<span class="keyword">in</span> <span class="variable">${DNS}</span>.key.pem -out <span class="variable">${DNS}</span>.key.key</span><br><span class="line"></span><br><span class="line"><span class="comment"># SSL 인증서 RootCA ChainCA 병합</span></span><br><span class="line">cat <span class="variable">${DNS}</span>.cert.pem &gt; unified.<span class="variable">${DNS}</span>.cert.pem</span><br><span class="line"><span class="built_in">echo</span> &gt;&gt; unified.<span class="variable">${DNS}</span>.cert.pem</span><br><span class="line"></span><br><span class="line">cat ChainCA1.crt ChainCA2.crt &gt;&gt; unified.<span class="variable">${DNS}</span>.cert.pem</span><br><span class="line"><span class="built_in">echo</span> &gt;&gt; unified.<span class="variable">${DNS}</span>.cert.pem</span><br><span class="line"></span><br><span class="line">cat RootCA.crt &gt;&gt; unified.<span class="variable">${DNS}</span>.cert.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># 쿠버네티스 ssl 시크릿 등록</span></span><br><span class="line">kubectl create secret tls \</span><br><span class="line">    <span class="variable">${SECRET_NAME}</span> \</span><br><span class="line">    --key <span class="variable">${DNS}</span>.key.key \</span><br><span class="line">    --cert unified.<span class="variable">${DNS}</span>.cert.pem</span><br><span class="line"></span><br><span class="line">kubectl get secret</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>ingress 생성</p>
+</li>
+<li>
+<p>포트를 오픈한다.</p>
+<ul>
+<li>docker registry:registry.nlp-utils</li>
+<li>nexus3: nlp-utils, nexus3.nlp-utils</li>
+<li>mongodb: mongo.nlp-utils</li>
+<li>gitlab: gitlab.nlp-utils</li>
+<li>nexcloud: cloud.nlp-utils</li>
+<li>kibana: kibana.nlp-utils</li>
+<li>elasticsearch: es.nlp-utils</li>
+</ul>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/">nginx advanced-configuration-with-annotations</a></p>
+</li>
+<li>
+<p><a href="#docker-registry-push-%EC%98%A4%EB%A5%98">docker registry push 오류</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://nginx.ingress.kubernetes.io/proxy-body-size:">nginx.ingress.kubernetes.io/proxy-body-size:</a> 10g</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">DNS=utils</span></span><br><span class="line"><span class="string">DNS_SECRET=web-ssl</span></span><br><span class="line"></span><br><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">|</span> <span class="string">tee</span> <span class="string">ingress.yaml</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nexus3</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/rewrite-target:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/ssl-redirect:</span> <span class="string">"false"</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/proxy-body-size:</span> <span class="string">"0"</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">hosts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">${DNS}</span></span><br><span class="line">      <span class="attr">secretName:</span> <span class="string">${DNS_SECRET}</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">hosts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">${DNS}.ncsoft.com</span></span><br><span class="line">      <span class="attr">secretName:</span> <span class="string">${DNS_SECRET}</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">hosts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">nexus3.${DNS}</span></span><br><span class="line">      <span class="attr">secretName:</span> <span class="string">${DNS_SECRET}</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">hosts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">resistry.${DNS}</span></span><br><span class="line">      <span class="attr">secretName:</span> <span class="string">${DNS_SECRET}</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">${DNS}</span></span><br><span class="line">      <span class="attr">http:</span></span><br><span class="line">        <span class="attr">paths:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line">            <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">            <span class="attr">backend:</span></span><br><span class="line">              <span class="attr">serviceName:</span> <span class="string">nexus3</span></span><br><span class="line">              <span class="attr">servicePort:</span> <span class="number">8081</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">nexus3.${DNS}</span></span><br><span class="line">      <span class="attr">http:</span></span><br><span class="line">        <span class="attr">paths:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line">            <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">            <span class="attr">backend:</span></span><br><span class="line">              <span class="attr">serviceName:</span> <span class="string">nexus3</span></span><br><span class="line">              <span class="attr">servicePort:</span> <span class="number">8081</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">registry.${DNS}</span></span><br><span class="line">      <span class="attr">http:</span></span><br><span class="line">        <span class="attr">paths:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line">            <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">            <span class="attr">backend:</span></span><br><span class="line">              <span class="attr">serviceName:</span> <span class="string">nexus3</span></span><br><span class="line">              <span class="attr">servicePort:</span> <span class="number">5000</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">ingress.yaml</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>repo 테스트: <strong>안됨</strong></li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">DNS=utils</span></span><br><span class="line"><span class="string">DNS_SECRET=web-ssl</span></span><br><span class="line"></span><br><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">|</span> <span class="string">tee</span> <span class="string">nexus3.ingress-repo.yaml</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nexus3-repo</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/rewrite-target:</span> <span class="string">/repository/</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/ssl-redirect:</span> <span class="string">"false"</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/proxy-body-size:</span> <span class="string">"0"</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">hosts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">repo.${DNS}</span></span><br><span class="line">      <span class="attr">secretName:</span> <span class="string">${DNS_SECRET}</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">repo.${DNS}</span></span><br><span class="line">      <span class="attr">http:</span></span><br><span class="line">        <span class="attr">paths:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line">            <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">            <span class="attr">backend:</span></span><br><span class="line">              <span class="attr">serviceName:</span> <span class="string">nexus3</span></span><br><span class="line">              <span class="attr">servicePort:</span> <span class="number">8081</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">nexus3.ingress-repo.yaml</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="ingress-dns-맴핑-확인"><a class="markdownIt-Anchor" href="#ingress-dns-맴핑-확인"></a> ingress DNS 맴핑 확인</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">❯ kubectl get svc                        </span><br><span class="line">NAME     TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                      AGE</span><br><span class="line">nexus3   ClusterIP   None         &lt;none&gt;        8081/TCP,5000/TCP,5001/TCP   3h49m</span><br><span class="line"></span><br><span class="line">❯ kubectl get ing</span><br><span class="line">NAME     CLASS    HOSTS                                                       ADDRESS         PORTS     AGE</span><br><span class="line">nexus3   &lt;none&gt;   utils,nexus3.utils,registry.utils + 1 more...   172.19.153.46   80, 443   3h16m</span><br><span class="line"></span><br><span class="line">❯ kubectl describe ing</span><br><span class="line">Name:             nexus3</span><br><span class="line">Namespace:        nexus3</span><br><span class="line">Address:          172.19.153.46</span><br><span class="line">Default backend:  default-http-backend:80 (&lt;error: endpoints <span class="string">"default-http-backend"</span> not found&gt;)</span><br><span class="line">TLS:</span><br><span class="line">  ssl terminates utils</span><br><span class="line">  ssl terminates nexus3.utils</span><br><span class="line">  ssl terminates registry.utils</span><br><span class="line">Rules:</span><br><span class="line">  Host                  Path  Backends</span><br><span class="line">  ----                  ----  --------</span><br><span class="line">  utils             </span><br><span class="line">                        /   nexus3:8081 (172.19.153.52:8081)</span><br><span class="line">  nexus3.utils      </span><br><span class="line">                        /   nexus3:8081 (172.19.153.52:8081)</span><br><span class="line">  registry.utils    </span><br><span class="line">                        /   nexus3:5000 (172.19.153.52:5000)</span><br><span class="line">Annotations:            nginx.ingress.kubernetes.io/rewrite-target: /</span><br><span class="line">Events:</span><br><span class="line">  Type    Reason  Age                    From                      Message</span><br><span class="line">  ----    ------  ----                   ----                      -------</span><br><span class="line">  Normal  UPDATE  5m37s (x7 over 3h14m)  nginx-ingress-controller  Ingress nexus3/nexus3</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="etchosts-에-dns-등록"><a class="markdownIt-Anchor" href="#etchosts-에-dns-등록"></a> /etc/hosts 에 DNS 등록</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IP_ADDR=192.0.0.2</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">${IP_ADDR}</span> utils nexus3.utils registry.utils"</span> | tee -a /etc/hosts</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="ssl-설정"><a class="markdownIt-Anchor" href="#ssl-설정"></a> ssl 설정</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create secret tls web-ssl --key web_key.key --cert web_cert.pem</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="docker-login-방법"><a class="markdownIt-Anchor" href="#docker-login-방법"></a> docker login 방법</h2>
+<ul>
+<li>/etc/docker/daemon.json 에 insecure-registries 등록</li>
+</ul>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"insecure-registries"</span>: [</span><br><span class="line">    <span class="string">"registry.utils"</span></span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>docker registry login</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker login registry.utils</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>쿠버네티스 레지스트리 시크릿 생성</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SECRET_NAME=registry</span><br><span class="line">USER_ID=ejpark</span><br><span class="line">USER_PW=*****</span><br><span class="line">USER_EMAIL=ejpark78@gmail.com</span><br><span class="line">REGISTRY_NS=default</span><br><span class="line">REGISTRY_SERVER=registry.utils</span><br><span class="line"></span><br><span class="line">kubectl create secret docker-registry \</span><br><span class="line">    <span class="variable">${SECRET_NAME}</span> \</span><br><span class="line">    --docker-server=<span class="variable">${REGISTRY_SERVER}</span> \</span><br><span class="line">    --docker-username=<span class="variable">${USER_ID}</span> \</span><br><span class="line">    --docker-password=<span class="variable">${USER_PW}</span> \</span><br><span class="line">    --docker-email=<span class="variable">${USER_EMAIL}</span> \</span><br><span class="line">    --namespace=<span class="variable">${REGISTRY_NS}</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="apt-를-위한-anonymous-access-활성화"><a class="markdownIt-Anchor" href="#apt-를-위한-anonymous-access-활성화"></a> apt 를 위한 Anonymous Access 활성화</h2>
+<p><img src="/image/nexus3/anonymous-access.png" alt="Anonymous Access 활성화"></p>
+<h2 id="apt-option"><a class="markdownIt-Anchor" href="#apt-option"></a> apt option</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/277793/getting-server-certificate-verification-failed-during-apt-get-update">Getting “server certificate verification failed” during apt-get update</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">APT_MIRROR=utils</span><br><span class="line">APT_OPTS=<span class="string">"--no-install-recommends -o Acquire::https::<span class="variable">${APT_MIRROR}</span>::Verify-Peer=false"</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>dockerfile 수정</li>
+</ul>
+<figure class="highlight dockerfile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ARG</span> APT_CODE_NAME=focal</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> &amp;&amp; <span class="built_in">echo</span> <span class="string">"# APT MIRROR 변경: <span class="variable">${APT_MIRROR}</span>"</span> \</span></span><br><span class="line"><span class="bash">	&amp;&amp; { \</span></span><br><span class="line"><span class="bash">		<span class="built_in">echo</span> <span class="string">"deb [trusted=yes] <span class="variable">${APT_MIRROR}</span> <span class="variable">${APT_CODE_NAME}</span> main restricted universe multiverse"</span>; \</span></span><br><span class="line"><span class="bash">		<span class="built_in">echo</span> <span class="string">"deb [trusted=yes] <span class="variable">${APT_MIRROR}</span> <span class="variable">${APT_CODE_NAME}</span>-updates main restricted universe multiverse"</span>; \</span></span><br><span class="line"><span class="bash">		<span class="built_in">echo</span> <span class="string">"deb [trusted=yes] <span class="variable">${APT_MIRROR}</span> <span class="variable">${APT_CODE_NAME}</span>-backports main restricted universe multiverse"</span>; \</span></span><br><span class="line"><span class="bash">	} &gt; /etc/apt/sources.list \</span></span><br><span class="line"><span class="bash">    &amp;&amp; apt update -yq <span class="variable">${APT_OPTS}</span> \</span></span><br><span class="line"><span class="bash">    &amp;&amp; apt install -yq <span class="variable">${APT_OPTS}</span> \</span></span><br><span class="line"><span class="bash">        ca-certificates</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="npm-저장소-사용"><a class="markdownIt-Anchor" href="#npm-저장소-사용"></a> npm 저장소 사용</h2>
+<figure class="highlight dockerfile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> npm config <span class="built_in">set</span> strict-ssl <span class="literal">false</span> \</span></span><br><span class="line"><span class="bash">  &amp;&amp; npm install --registry <span class="variable">$NPM_REGISTRY</span></span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://yangyag.tistory.com/477">UNABLE_TO_VERIFY_LEAF_SIGNATURE 에러 발생시</a></li>
+</ul>
+<h2 id="이슈"><a class="markdownIt-Anchor" href="#이슈"></a> 이슈</h2>
+<h2 id="docker-registry-push-오류"><a class="markdownIt-Anchor" href="#docker-registry-push-오류"></a> docker registry push 오류</h2>
+<ul>
+<li>
+<p>413 request entity too large</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kubernetes/ingress-nginx/issues/4825">413 request entity too large</a></li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size">custom-max-body-size</a></li>
+</ul>
+</li>
+<li>
+<p>annotaions에 <a target="_blank" rel="noopener" href="http://nginx.ingress.kubernetes.io/proxy-body-size:">nginx.ingress.kubernetes.io/proxy-body-size:</a> “0” 추가</p>
+</li>
+</ul>
+<pre class="highlight"><code class="yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">nexus3</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">nexus3</span>
+  <span class="hljs-attr">annotations:</span>
+    <span class="hljs-attr">nginx.ingress.kubernetes.io/rewrite-target:</span> <span class="hljs-string">/</span>
+    <span class="hljs-attr">nginx.ingress.kubernetes.io/proxy-body-size:</span> <span class="hljs-string">"0"</span>
+</code></pre>
+<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hub.docker.com/r/sonatype/nexus3/">nexus3 docker hub</a></li>
+<li><a target="_blank" rel="noopener" href="https://velog.io/@king/private-docker-registry">사내 Docker Registry 만들기 (Nexus3 기반)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.edc4it.com/en/blog/minikube-nexus-statefulset-ingress">Set up a private Nexus repository in k8s as a StatefulSet and Ingress</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/" rel="tag"># 설치 기록</a>
+              <a href="/tags/nexus3/" rel="tag"># nexus3</a>
+              <a href="/tags/mongodb/" rel="tag"># mongodb</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ckf3rla6q000q9e8o943377t2.html" rel="prev" title="쿠버네티스 네임스페이스 강제 삭제 방법">
+                  <i class="fa fa-chevron-left"></i> 쿠버네티스 네임스페이스 강제 삭제 방법
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ckf3rla6n000n9e8o37g2fxpd.html" rel="next" title="cinnamon 원격 작업 환경 구축">
+                  cinnamon 원격 작업 환경 구축 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Park Eunjin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+<script src="/bundle.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script></body></html>

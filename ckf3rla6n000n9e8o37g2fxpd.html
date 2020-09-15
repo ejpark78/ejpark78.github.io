@@ -1,0 +1,496 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+  
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ejpark78.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="실패함  xfce4 xrdp 설치 123456sudo apt-get install -y xfce4 xrdpsudo apt-get install -y language-pack-ko fonts-nanum*# sudo apt-get install mate-core mate-desktop-environment mate-notification-daemon xrdp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cinnamon 원격 작업 환경 구축">
+<meta property="og:url" content="https://ejpark78.github.io/ckf3rla6n000n9e8o37g2fxpd.html">
+<meta property="og:site_name" content="오늘은 뭘 배우셨나요?">
+<meta property="og:description" content="실패함  xfce4 xrdp 설치 123456sudo apt-get install -y xfce4 xrdpsudo apt-get install -y language-pack-ko fonts-nanum*# sudo apt-get install mate-core mate-desktop-environment mate-notification-daemon xrdp">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-08-12T04:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-28T20:51:28.136Z">
+<meta property="article:author" content="Park Eunjin">
+<meta property="article:tag" content="설치 기록">
+<meta property="article:tag" content="cinnamon">
+<meta property="article:tag" content="xrdp">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ejpark78.github.io/ckf3rla6n000n9e8o37g2fxpd.html">
+
+
+<script data-pjax="" class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'infra'
+  };
+</script>
+
+  <title>cinnamon 원격 작업 환경 구축 | 오늘은 뭘 배우셨나요?</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css');loadCss('//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">오늘은 뭘 배우셨나요?</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">나도 블로그가 있다!!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">59</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">61</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">52</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%A4%ED%8C%A8%ED%95%A8"><span class="nav-number">1.</span> <span class="nav-text"> 실패함</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xfce4-xrdp-%EC%84%A4%EC%B9%98"><span class="nav-number">1.1.</span> <span class="nav-text"> xfce4 xrdp 설치</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#change-default-session-type-to-xvnc"><span class="nav-number">1.2.</span> <span class="nav-text"> Change default session type to Xvnc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#avoid-authentication-require-dialog"><span class="nav-number">1.3.</span> <span class="nav-text"> Avoid Authentication Require dialog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create-~xsession-and-~xsessionrc"><span class="nav-number">1.4.</span> <span class="nav-text"> Create ~/.xsession and ~/.xsessionrc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xrdp-server-%EA%B8%B0%ED%83%80"><span class="nav-number">1.5.</span> <span class="nav-text"> xrdp server 기타</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#freerdp-client"><span class="nav-number">1.6.</span> <span class="nav-text"> freerdp client</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9D%B4%EC%8A%88"><span class="nav-number">1.7.</span> <span class="nav-text"> 이슈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#could-not-acquire-name-on-session-bus"><span class="nav-number">1.7.1.</span> <span class="nav-text"> could not acquire name on session bus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#login-failed-for-display-0"><span class="nav-number">1.7.2.</span> <span class="nav-text"> login failed for display 0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B0%B8%EA%B3%A0"><span class="nav-number">1.8.</span> <span class="nav-text"> 참고</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Park Eunjin</p>
+  <div class="site-description" itemprop="description">적자생존!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla6n000n9e8o37g2fxpd.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cinnamon 원격 작업 환경 구축
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 13:00:00" itemprop="dateCreated datePublished" datetime="2020-08-12T13:00:00+09:00">2020-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-29 05:51:28" itemprop="dateModified" datetime="2020-08-29T05:51:28+09:00">2020-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/" itemprop="url" rel="index"><span itemprop="name">설치 기록</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/cinnamon/" itemprop="url" rel="index"><span itemprop="name">cinnamon</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/cinnamon/xrdp/" itemprop="url" rel="index"><span itemprop="name">xrdp</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="실패함"><a class="markdownIt-Anchor" href="#실패함"></a> <em>실패함</em></h1>
+<h2 id="xfce4-xrdp-설치"><a class="markdownIt-Anchor" href="#xfce4-xrdp-설치"></a> xfce4 xrdp 설치</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y xfce4 xrdp</span><br><span class="line">sudo apt-get install -y language-pack-ko fonts-nanum*</span><br><span class="line"></span><br><span class="line"><span class="comment"># sudo apt-get install mate-core mate-desktop-environment mate-notification-daemon xrdp</span></span><br><span class="line"></span><br><span class="line">출처: https://hbesthee.tistory.com/1565 [채윤이네집]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="change-default-session-type-to-xvnc"><a class="markdownIt-Anchor" href="#change-default-session-type-to-xvnc"></a> Change default session type to Xvnc</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | sudo patch -p0</span><br><span class="line">--- xrdp.ini.orig       2018-07-11 14:22:02.852103588 +0900</span><br><span class="line">+++ xrdp.ini    2018-07-11 14:23:30.978905479 +0900</span><br><span class="line">@@ -153,6 +153,16 @@ tcutils=<span class="literal">true</span></span><br><span class="line"> ; Some session types such as Xorg, X11rdp and Xvnc start a display server.</span><br><span class="line"> ; Startup <span class="built_in">command</span>-line parameters <span class="keyword">for</span> the display server are configured</span><br><span class="line"> ; <span class="keyword">in</span> sesman.ini. See and configure also sesman.ini.</span><br><span class="line">+[Xvnc]</span><br><span class="line">+name=Xvnc</span><br><span class="line">+lib=libvnc.so</span><br><span class="line">+username=ask</span><br><span class="line">+password=ask</span><br><span class="line">+ip=127.0.0.1</span><br><span class="line">+port=-1</span><br><span class="line">+<span class="comment">#xserverbpp=24</span></span><br><span class="line">+<span class="comment">#delay_ms=2000</span></span><br><span class="line">+</span><br><span class="line"> [Xorg]</span><br><span class="line"> name=Xorg</span><br><span class="line"> lib=libxup.so</span><br><span class="line">@@ -172,16 +182,6 @@ port=-1</span><br><span class="line"> xserverbpp=24</span><br><span class="line"> code=10</span><br><span class="line"></span><br><span class="line">-[Xvnc]</span><br><span class="line">-name=Xvnc</span><br><span class="line">-lib=libvnc.so</span><br><span class="line">-username=ask</span><br><span class="line">-password=ask</span><br><span class="line">-ip=127.0.0.1</span><br><span class="line">-port=-1</span><br><span class="line">-<span class="comment">#xserverbpp=24</span></span><br><span class="line">-<span class="comment">#delay_ms=2000</span></span><br><span class="line">-</span><br><span class="line"> [console]</span><br><span class="line"> name=console</span><br><span class="line"> lib=libvnc.so</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo systemctl restart xrdp</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="avoid-authentication-require-dialog"><a class="markdownIt-Anchor" href="#avoid-authentication-require-dialog"></a> Avoid Authentication Require dialog</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | sudo tee /etc/polkit-1/localauthority/50-local.d/xrdp-flatpak.pkla</span><br><span class="line">[Netowrkmanager]</span><br><span class="line">Identity=unix-user:*</span><br><span class="line">Action=org.freedesktop.Flatpak.appstream-update</span><br><span class="line">ResultAny=no</span><br><span class="line">ResultInactive=no</span><br><span class="line">ResultActive=yes</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo systemctl restart polkit</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="create-~xsession-and-~xsessionrc"><a class="markdownIt-Anchor" href="#create-~xsession-and-~xsessionrc"></a> Create ~/.xsession and ~/.xsessionrc</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"cinnamon-session"</span> &gt; ~/.xsession</span><br><span class="line"></span><br><span class="line">D=/usr/share/gnome:/usr/share/cinnamon:/usr/<span class="built_in">local</span>/share:/usr/share</span><br><span class="line">D=<span class="variable">${D}</span>:/var/lib/snapd/desktop</span><br><span class="line">C=/etc/xdg/xdg-cinnamon:/etc/xdg</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF &gt; ~/.xsessionrc</span><br><span class="line"><span class="built_in">export</span> XDG_SESSION_DESKTOP=cinnamon</span><br><span class="line"><span class="built_in">export</span> XDG_DATA_DIRS=<span class="variable">${D}</span></span><br><span class="line"><span class="built_in">export</span> XDG_CONFIG_DIRS=<span class="variable">${C}</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo adduser xrdp ssl-cert</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="xrdp-server-기타"><a class="markdownIt-Anchor" href="#xrdp-server-기타"></a> xrdp server 기타</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y xrdp</span><br><span class="line"></span><br><span class="line">sudo sed -e <span class="string">'s/^new_cursors=true/new_cursors=false/g'</span> \</span><br><span class="line">           -i /etc/xrdp/xrdp.ini</span><br><span class="line"></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> xrdp</span><br><span class="line">sudo systemctl restart xrdp</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="freerdp-client"><a class="markdownIt-Anchor" href="#freerdp-client"></a> freerdp client</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.freerdp.com/">freerdp</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/FreeRDP/FreeRDP/wiki/PreBuilds">freerdp PreBuilds</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | tee crawler-ui.rdp                                                                                     </span><br><span class="line">full address:s:0.0.0.0:3389</span><br><span class="line">prompt <span class="keyword">for</span> credentials:i:1</span><br><span class="line">administrative session:i:1</span><br><span class="line">username:s:ubuntu</span><br><span class="line">enablecredsspsupport:i:0</span><br><span class="line">desktopwidth:i:1900</span><br><span class="line">desktopheight:i:1000</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">nohup xfreerdp crawler-ui.rdp /drive:/home/ejpark 1&gt;/dev/null &amp;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="이슈"><a class="markdownIt-Anchor" href="#이슈"></a> 이슈</h2>
+<h3 id="could-not-acquire-name-on-session-bus"><a class="markdownIt-Anchor" href="#could-not-acquire-name-on-session-bus"></a> could not acquire name on session bus</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://mslee89.tistory.com/84">VNC 관련 Error</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"unset DBUS_SESSION_BUS_ADDRESS"</span> &gt; .vnc/xstartup</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="login-failed-for-display-0"><a class="markdownIt-Anchor" href="#login-failed-for-display-0"></a> login failed for display 0</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install xorg-video-abi-24</span><br><span class="line">sudo apt purge xorgxrdp-hwe-18.04 freerdp-x11</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.hiroom2.com/2018/07/11/linuxmint-19-xrdp-cinnamon-en/">LinuxMint 19: Connect to Cinnamon desktop environment via XRDP</a><br>
+<a target="_blank" rel="noopener" href="https://itsfoss.com/install-cinnamon-on-ubuntu/">How to Install Cinnamon Desktop on Ubuntu</a><br>
+<a target="_blank" rel="noopener" href="https://www.hiroom2.com/2018/05/07/ubuntu-1804-xrdp-cinnamon-en/">Ubuntu 18.04: Connect to Cinnamon desktop environment via XRDP - 2018</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/" rel="tag"># 설치 기록</a>
+              <a href="/tags/cinnamon/" rel="tag"># cinnamon</a>
+              <a href="/tags/xrdp/" rel="tag"># xrdp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ckf3rla6s000r9e8o6w6m3hyr.html" rel="prev" title="쿠버네티스 기반 인프라 설치">
+                  <i class="fa fa-chevron-left"></i> 쿠버네티스 기반 인프라 설치
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ckf3rla6k000m9e8ocar8bj4b.html" rel="next" title="Hexo next 테마 설치 이력">
+                  Hexo next 테마 설치 이력 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Park Eunjin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+<script src="/bundle.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script></body></html>
