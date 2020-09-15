@@ -1,0 +1,723 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+  
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ejpark78.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="ACL 2020   virtual.acl2020   T8: Open-Domain Question Answering   repo    PART 1   stanfordnlp: CoQA  home paper, CoQA: A Conversational Question Answering Challenge    facebookresearch   DrQA  githu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACL 2020">
+<meta property="og:url" content="https://ejpark78.github.io/ckf3rmlfo003ck78ofcph49p6.html">
+<meta property="og:site_name" content="오늘은 뭘 배우셨나요?">
+<meta property="og:description" content="ACL 2020   virtual.acl2020   T8: Open-Domain Question Answering   repo    PART 1   stanfordnlp: CoQA  home paper, CoQA: A Conversational Question Answering Challenge    facebookresearch   DrQA  githu">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-08-21T04:17:33.000Z">
+<meta property="article:modified_time" content="2020-08-28T20:51:28.140Z">
+<meta property="article:author" content="Park Eunjin">
+<meta property="article:tag" content="ACL2020">
+<meta property="article:tag" content="T8">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ejpark78.github.io/ckf3rmlfo003ck78ofcph49p6.html">
+
+
+<script data-pjax="" class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'study'
+  };
+</script>
+
+  <title>ACL 2020 | 오늘은 뭘 배우셨나요?</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css');loadCss('//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">오늘은 뭘 배우셨나요?</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">나도 블로그가 있다!!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">63</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">53</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#acl-2020"><span class="nav-number">1.</span> <span class="nav-text"> ACL 2020</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-1"><span class="nav-number">2.</span> <span class="nav-text"> PART 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21550-%EB%B6%84%EB%B6%80%ED%84%B0-part-5-dense-retriever-and-end-to-end-training"><span class="nav-number">3.</span> <span class="nav-text"> 2:15:50 분부터 PART 5: Dense Retriever and End-to-end Training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#31300-%EB%B6%84%EB%B6%80%ED%84%B0-part-6-retrieval-free-approaches"><span class="nav-number">4.</span> <span class="nav-text"> 3:13:00 분부터 PART 6: Retrieval-free Approaches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32700-%EB%B6%84%EB%B6%80%ED%84%B0-part-7-open-domain-question-answering-using-text-knowledge-bases"><span class="nav-number">5.</span> <span class="nav-text"> 3:27:00 분부터 PART 7: Open-Domain Question Answering using Text &amp; Knowledge Bases</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34850-%EB%B6%84%EB%B6%80%ED%84%B0-part-8-open-problems-and-future-directions"><span class="nav-number">6.</span> <span class="nav-text"> 3:48:50 분부터 PART 8: Open problems and future directions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#papers"><span class="nav-number">7.</span> <span class="nav-text"> papers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B0%B8%EA%B3%A0"><span class="nav-number">8.</span> <span class="nav-text"> 참고</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Park Eunjin</p>
+  <div class="site-description" itemprop="description">적자생존!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlfo003ck78ofcph49p6.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ACL 2020
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-21 13:17:33" itemprop="dateCreated datePublished" datetime="2020-08-21T13:17:33+09:00">2020-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-29 05:51:28" itemprop="dateModified" datetime="2020-08-29T05:51:28+09:00">2020-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACL2020/" itemprop="url" rel="index"><span itemprop="name">ACL2020</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACL2020/T8/" itemprop="url" rel="index"><span itemprop="name">T8</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="acl-2020"><a class="markdownIt-Anchor" href="#acl-2020"></a> ACL 2020</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://virtual.acl2020.org/">virtual.acl2020</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://virtual.acl2020.org/tutorial_T8.html">T8: Open-Domain Question Answering</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/danqi/acl2020-openqa-tutorial/">repo</a></p>
+</li>
+</ul>
+<h2 id="part-1"><a class="markdownIt-Anchor" href="#part-1"></a> PART 1</h2>
+<ul>
+<li>
+<p>stanfordnlp: CoQA</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stanfordnlp.github.io/coqa/">home</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1808.07042">paper, CoQA: A Conversational Question Answering Challenge</a></li>
+</ul>
+</li>
+<li>
+<p>facebookresearch</p>
+<ul>
+<li>
+<p>DrQA</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/DrQA">github</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1704.00051">paper, Reading Wikipedia to Answer Open-Domain Questions</a></li>
+</ul>
+</li>
+<li>
+<p>SpanBERT</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/SpanBERT">github</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1907.10529">paper, SpanBERT: Improving Pre-training by Representing and Predicting Spans</a></li>
+</ul>
+</li>
+<li>
+<p>RoBERTa</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/fairseq/tree/master/examples/roberta">github</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1907.11692">RoBERTa: A Robustly Optimized BERT Pretraining Approach</a></li>
+</ul>
+</li>
+<li>
+<p>DPR</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/DPR">github</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2004.04906">Dense Passage Retrieval for Open-Domain Question Answering</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>WikiQA</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/D15-1237/">WikiQA: A Challenge Dataset for Open-Domain Question Answering</a></li>
+<li><a target="_blank" rel="noopener" href="https://vimeo.com/169432924">video</a></li>
+</ul>
+</li>
+<li>
+<p>microsoft</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/publication/the-value-of-semantic-parse-labeling-for-knowledge-base-question-answering-2/">The Value of Semantic Parse Labeling for Knowledge Base Question Answering</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="21550-분부터-part-5-dense-retriever-and-end-to-end-training"><a class="markdownIt-Anchor" href="#21550-분부터-part-5-dense-retriever-and-end-to-end-training"></a> 2:15:50 분부터 PART 5: Dense Retriever and End-to-end Training</h2>
+<p>Danqi Chen	Dense retriever and end-to-end training<br>
+Danqi Chen	Retrieval-free approaches<br>
+Scott Yih	Open-domain QA using KBs and text<br>
+Scott Yih	Open problems and future directions</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://slideslive.com/38931668/t8-opendomain-question-answering">slides</a></p>
+</li>
+<li>
+<p>Latent Retrieval for Weakly Supervised Open Domain Question Answering, 2019</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://jeonsworld.github.io/NLP/orqa/">[논문리뷰] Latent Retrieval for Weakly Supervised Open Domain Question Answering</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1906.00300.pdf">Latent Retrieval for Weakly Supervised Open Domain Question Answering</a></li>
+</ul>
+</li>
+<li>
+<p>REALM: Retrieval-Augmented Language Model Pre-Training, 2020</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://kentonl.com/pub/gltpc.2020.pdf">paper</a></li>
+<li><a target="_blank" rel="noopener" href="https://jeonsworld.github.io/NLP/realm">[논문리뷰] REALM: Retrieval-Augmented Language Model Pre-Training</a></li>
+<li><a target="_blank" rel="noopener" href="https://codertimo.github.io/2020/07/27/REALM-review/">[논문리뷰] REALM: Retrieval-Augmented Language Model Pre-Training (스케터랩)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.slideshare.net/HoonHeo5/realm-231290579?fbclid=IwAR3AEUDPc_nibxV5Dsg5W_AomUzaS57dor_gJ80D2V4KnTxk9clNeGxAimE">논문리뷰, 월간 자연어 처리</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/deepset-ai/haystack">repo, paperswithcode</a></li>
+</ul>
+</li>
+<li>
+<p>Dense Passage Retrieval for Open-Domain Question Answering, 2020</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2004.04906.pdf">paper</a></li>
+<li><a target="_blank" rel="noopener" href="https://codertimo.github.io/2020/07/29/DPR-review/">[논문리뷰] Dense Passage Retrieval for Open-Domain Question Answering</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.facebook.com/monthly.nlp/posts/276190540479484">논문리뷰, 월간 자연어 처리</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/DPR">repo</a></li>
+</ul>
+</li>
+<li>
+<p>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks, 2020</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2005.11401.pdf">paper</a></li>
+<li><a target="_blank" rel="noopener" href="https://jeonsworld.github.io/NLP/rag/">[논문리뷰] Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a></li>
+</ul>
+</li>
+<li>
+<p>Real-Time Open-Domain Question Answering with Dense-Sparse Phrase Index, 2019</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1906.05807.pdf">paper</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.facebook.com/ClovaAIResearch/posts/827558360947213">네이버 페이스북</a>
+<ul>
+<li>이 논문에서 제안하는 밀집-희소 (dense &amp; sparse) phrase 인코딩은 phrase의 통사적, 의미적, 그리고 어휘 정보를 효과적으로 파악하며, context document의 pipeline filtering을 제거합니다. 또한 최적화 전략들을 사용하면서, 새로운 모델은 단일 4-GPU 서버에서 작동가능하며 CPU로만으로도 2TB 이하로,  600억개 까지의 phrase가 있는 위키피디아 전체를 커버 가능합니다. SQuAD-Open에 관한 이 실험은 컴퓨팅 비용을 1/6000로 줄여주며, 이는 바로, 최소 58배 빠른 end-to-end 추론 CPU에 대한 벤치마크를 의미합니다.</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://blog.pingpong.us/ml-seminar-season-2/">핑퐁팀 세미나</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/uwnlp/denspi">repo</a></li>
+<li>wiki: 250T -&gt; 1.5T</li>
+</ul>
+</li>
+<li>
+<p>Contextualized Sparse Representations for Real-Time Open-Domain Question Answering, 2020</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1911.02896.pdf">paper</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jhyuklee/sparc">repo</a></li>
+</ul>
+</li>
+<li>
+<p>summary</p>
+<ul>
+<li>ORQA/REALM: First demonstrate that it is possible to jointly train the retriever and reader without any sparse IR components; requires novel ways of pre-training</li>
+<li>DPR/RAG: It is possible to learn the dense retrieval only from Q/A pairs without pre-training!</li>
+<li>DenSPI /Sparc: It is possible to index and retrieve at phrase level without requiring an explicit “reader”. Very fast inference time but slightly worse performance. Sparse features still matter.</li>
+</ul>
+</li>
+</ul>
+<h2 id="31300-분부터-part-6-retrieval-free-approaches"><a class="markdownIt-Anchor" href="#31300-분부터-part-6-retrieval-free-approaches"></a> 3:13:00 분부터 PART 6: Retrieval-free Approaches</h2>
+<ul>
+<li>
+<p>Language Models as Knowledge Bases, 2019</p>
+</li>
+<li>
+<p>GPT2: Language Models are Unsupervised Multitask Learners, 2019</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://jalammar.github.io/illustrated-gpt2/">repo</a></li>
+</ul>
+</li>
+<li>
+<p>GPT-3: Language Models are Few-Shot Learners, 2020</p>
+</li>
+<li>
+<p>How Much Knowledge Can You Pack Into the Parameters of a Language Model, 2020</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://efficientqa.github.io/">Efficient Open-Domain Question Answering</a></p>
+</li>
+</ul>
+<h2 id="32700-분부터-part-7-open-domain-question-answering-using-text-knowledge-bases"><a class="markdownIt-Anchor" href="#32700-분부터-part-7-open-domain-question-answering-using-text-knowledge-bases"></a> 3:27:00 분부터 PART 7: Open-Domain Question Answering using Text &amp; Knowledge Bases</h2>
+<ul>
+<li>
+<p>WebQuestionsSP (WebQSP): The Value of Semantic Parse Labeling for Knowledge Base Question Answering, 2016</p>
+</li>
+<li>
+<p>GRAFT-Net: Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text, 2018</p>
+<ul>
+<li>Construct a heterogeneous question graph using both KB and text</li>
+<li>그래프 생성</li>
+</ul>
+</li>
+<li>
+<p>PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text, 2019</p>
+<ul>
+<li><strong>Incrementally construct</strong> the question graph using a graph CNN</li>
+</ul>
+</li>
+<li>
+<p>Knowledge-aware Reader: Improving Question Answering over Incomplete KBs with Knowledge-Aware Reader, 2019</p>
+<ul>
+<li>IR + sub graph embedding</li>
+</ul>
+</li>
+<li>
+<p>Knowledge Guided Text Retrieval and Reading for Open Domain Question Answering, 2020</p>
+<ul>
+<li>use ontology relation: part of etc.</li>
+</ul>
+</li>
+<li>
+<p>Extended reading</p>
+<ul>
+<li>Asai et al., 2020. Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering</li>
+</ul>
+</li>
+</ul>
+<h2 id="34850-분부터-part-8-open-problems-and-future-directions"><a class="markdownIt-Anchor" href="#34850-분부터-part-8-open-problems-and-future-directions"></a> 3:48:50 분부터 PART 8: Open problems and future directions</h2>
+<ul>
+<li>
+<p>Tutorial Summary: Latest development on QA</p>
+</li>
+<li>
+<p>Popular datasets for training and evaluating open-domain QA</p>
+</li>
+<li>
+<p>Retriever + Reader</p>
+<ul>
+<li>DrQA - Chen et al. 2017. Reading Wikipedia to Answer Opendomain Questions.</li>
+</ul>
+</li>
+<li>
+<p>Dense retriever and end-to-end training</p>
+<ul>
+<li>ORQA - Lee et al. 2019. Latent Retrieval for Weakly Supervised Open Domain Question Answering.</li>
+</ul>
+</li>
+<li>
+<p>Retrieval-free</p>
+<ul>
+<li>T5 - Roberts et al. 2020. How Much Knowledge Can You Pack Into the Parameters of a Language Model?</li>
+</ul>
+</li>
+</ul>
+<h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> papers</h2>
+<ul>
+<li>
+<p>Unsupervised Word Translation with Adversarial Autoencoder</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://virtual.acl2020.org/paper_cl.1550.html">https://virtual.acl2020.org/paper_cl.1550.html</a></li>
+</ul>
+</li>
+<li>
+<p>RPD: A Distance Function Between Word Embeddings</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://virtual.acl2020.org/paper_srw.39.html">https://virtual.acl2020.org/paper_srw.39.html</a></li>
+</ul>
+</li>
+<li>
+<p>schuBERT: Optimizing Elements of BERT</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://virtual.acl2020.org/paper_main.250.html">https://virtual.acl2020.org/paper_main.250.html</a></li>
+</ul>
+</li>
+<li>
+<p>MobileBERT: a Compact Task-Agnostic BERT for Resource-Limited Devices</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://virtual.acl2020.org/paper_main.195.html">https://virtual.acl2020.org/paper_main.195.html</a></li>
+</ul>
+</li>
+<li>
+<p>DeeBERT: Dynamic Early Exiting for Accelerating BERT Inference</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://virtual.acl2020.org/paper_main.204.html">https://virtual.acl2020.org/paper_main.204.html</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.pingpong.us/acl2020-review/">핑퐁팀과 함께하는 ACL 2020 리뷰</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangxiaocvpr/p/12403079.html">BERT-related Papers</a></li>
+<li><a target="_blank" rel="noopener" href="https://huffon.github.io/">허훈, 카카오브레인, 월간 자연어 처리</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ACL2020/" rel="tag"># ACL2020</a>
+              <a href="/tags/T8/" rel="tag"># T8</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ckf3rmlfr003fk78o393pdeyr.html" rel="prev" title="airflow">
+                  <i class="fa fa-chevron-left"></i> airflow
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ckf3rmlfd002uk78o3gxidrxz.html" rel="next" title="chrome에 열려있는 탭을 PC로 가져오는 방법">
+                  chrome에 열려있는 탭을 PC로 가져오는 방법 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Park Eunjin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+<script src="/bundle.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script></body></html>

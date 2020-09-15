@@ -1,0 +1,1141 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+  
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ejpark78.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="한국어 NLP dataset 모음  출처: 한국어 NLP dataset 모음     코퍼스 명 용도 설명 링크     Naver sentiment movie corpus v1.0 분류 네이버 됨 link   Chatbot_data 분류 채팅 됨 link   청와대 모음 RAW 일자 Raw 데이터 link   Korean NER Corpus NER 형태소)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="한국어 데이터셋">
+<meta property="og:url" content="https://ejpark78.github.io/ckf3rmlic00apk78o8yk5dvkd.html">
+<meta property="og:site_name" content="오늘은 뭘 배우셨나요?">
+<meta property="og:description" content="한국어 NLP dataset 모음  출처: 한국어 NLP dataset 모음     코퍼스 명 용도 설명 링크     Naver sentiment movie corpus v1.0 분류 네이버 됨 link   Chatbot_data 분류 채팅 됨 link   청와대 모음 RAW 일자 Raw 데이터 link   Korean NER Corpus NER 형태소)">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-08-07T10:05:08.000Z">
+<meta property="article:modified_time" content="2020-08-28T20:51:28.140Z">
+<meta property="article:author" content="Park Eunjin">
+<meta property="article:tag" content="한국어 데이터셋">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ejpark78.github.io/ckf3rmlic00apk78o8yk5dvkd.html">
+
+
+<script data-pjax="" class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'study'
+  };
+</script>
+
+  <title>한국어 데이터셋 | 오늘은 뭘 배우셨나요?</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css');loadCss('//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">오늘은 뭘 배우셨나요?</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">나도 블로그가 있다!!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">63</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">53</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%95%9C%EA%B5%AD%EC%96%B4-nlp-dataset-%EB%AA%A8%EC%9D%8C"><span class="nav-number">1.</span> <span class="nav-text"> 한국어 NLP dataset 모음</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%95%9C%EA%B5%AD%EC%96%B4-nlp-dataset-%EB%AA%A8%EC%9D%8C-2"><span class="nav-number">2.</span> <span class="nav-text"> 한국어 NLP dataset 모음</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awesomekoreandata-%EC%86%A1%EC%98%81%EC%88%99"><span class="nav-number">3.</span> <span class="nav-text"> AwesomeKoreanData, 송영숙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#awesome_korean_data"><span class="nav-number">3.1.</span> <span class="nav-text"> Awesome_Korean_Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%ED%95%9C%EA%B5%AD%EC%96%B4-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0"><span class="nav-number">3.2.</span> <span class="nav-text"> 한국어 텍스트 데이터</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%ED%9A%8C%EC%82%AC%EB%82%98-%ED%8C%80%EC%97%90%EC%84%9C-%EA%B5%AC%EC%B6%95%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0"><span class="nav-number">3.3.</span> <span class="nav-text"> 회사나 팀에서 구축한 데이터</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B5%AD%EA%B0%80%EC%A0%81-%EA%B7%9C%EB%AA%A8%EC%97%90%EC%84%9C-%EA%B5%AC%EC%B6%95%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0"><span class="nav-number">3.4.</span> <span class="nav-text"> 국가적 규모에서 구축한 데이터</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%95%9C%EA%B5%AD%EC%96%B4-%EB%A7%90%EB%AD%89%EC%B9%98-%EB%AA%A8%EC%9D%8C-zetawiki"><span class="nav-number">4.</span> <span class="nav-text"> 한국어 말뭉치 모음, zetawiki</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9B%90%EB%AC%B8"><span class="nav-number">4.1.</span> <span class="nav-text"> 원문</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%82%B4%EC%9A%A9"><span class="nav-number">4.2.</span> <span class="nav-text"> 내용</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%95%9C%EA%B5%AD%EC%96%B4-%EC%9E%90%EC%97%B0%EC%96%B4-%EC%B2%98%EB%A6%AC-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B-%EB%AA%A9%EB%A1%9D-%EC%95%84%EA%B8%B0%EC%97%AC%EC%9A%B0%EC%9D%98-%EC%9E%90%EA%B8%B0%EA%B3%84%EB%B0%9C%EB%A1%9C%EA%B7%B8"><span class="nav-number">5.</span> <span class="nav-text"> 한국어 자연어 처리 데이터셋 목록, 아기여우의 자기계발로그</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%B6%84%EB%A5%98-%EB%B6%84%EC%84%9D-%EA%B0%90%EC%84%B1%EB%B6%84%EC%84%9D-%EC%9D%98%EB%8F%84%EB%B6%84%EB%A5%98"><span class="nav-number">5.1.</span> <span class="nav-text"> 분류 분석 (감성분석/ 의도분류)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9C%A0%EC%82%AC%EB%8F%84-%ED%8C%90%EB%B3%84"><span class="nav-number">5.2.</span> <span class="nav-text"> 유사도 판별</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9E%90%EC%97%B0%EC%96%B4-%EC%A7%88%EC%9D%98%EC%9D%91%EB%8B%B5-%EA%B8%B0%EA%B3%84%EB%8F%85%ED%95%B4-mrc"><span class="nav-number">5.3.</span> <span class="nav-text"> 자연어 질의응답 (기계독해 / MRC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9E%90%EC%97%B0%EC%96%B4-%EC%A7%88%EC%9D%98%EC%9D%91%EB%8B%B5-%EC%9D%BC%EB%B0%98-%EC%83%81%EC%8B%9D"><span class="nav-number">5.4.</span> <span class="nav-text"> 자연어 질의응답 (일반 상식)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%8C%80%ED%99%94-%EB%AA%A8%EB%8D%B8"><span class="nav-number">5.5.</span> <span class="nav-text"> 대화 모델</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B8%B0%ED%83%80-%EA%B8%B0%EA%B3%84%EB%B2%88%EC%97%AD-ner-%EC%9A%94%EC%95%BD"><span class="nav-number">5.6.</span> <span class="nav-text"> 기타 (기계번역 / NER / 요약 / …)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#raw-corpus"><span class="nav-number">5.7.</span> <span class="nav-text"> RAW Corpus</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Park Eunjin</p>
+  <div class="site-description" itemprop="description">적자생존!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlic00apk78o8yk5dvkd.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          한국어 데이터셋
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-07 19:05:08" itemprop="dateCreated datePublished" datetime="2020-08-07T19:05:08+09:00">2020-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-29 05:51:28" itemprop="dateModified" datetime="2020-08-29T05:51:28+09:00">2020-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%ED%95%9C%EA%B5%AD%EC%96%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B/" itemprop="url" rel="index"><span itemprop="name">한국어 데이터셋</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%ED%95%9C%EA%B5%AD%EC%96%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B/%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B/" itemprop="url" rel="index"><span itemprop="name">데이터셋</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="한국어-nlp-dataset-모음"><a class="markdownIt-Anchor" href="#한국어-nlp-dataset-모음"></a> 한국어 NLP dataset 모음</h2>
+<blockquote>
+<p>출처: <a target="_blank" rel="noopener" href="https://datasetfinder.blogspot.com/2020/04/dataset.html?spref=fb&amp;fbclid=IwAR0vjNfrcWJEUhTdgRxrDFRTEmz-8nYuhEPhsWYLyGDJvBbv7y2nllQ7y5M">한국어 NLP dataset 모음</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>코퍼스 명</th>
+<th>용도</th>
+<th>설명</th>
+<th>링크</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naver sentiment movie corpus v1.0</td>
+<td>분류</td>
+<td>네이버 됨</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/e9t/nsmc">link</a></td>
+</tr>
+<tr>
+<td>Chatbot_data</td>
+<td>분류</td>
+<td>채팅 됨</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/songys/Chatbot_data">link</a></td>
+</tr>
+<tr>
+<td>청와대 모음</td>
+<td>RAW</td>
+<td>일자 Raw 데이터</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/akngs/petitions">link</a></td>
+</tr>
+<tr>
+<td>Korean NER Corpus</td>
+<td>NER</td>
+<td>형태소)</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/machinereading/KoreanNERCorpus">link</a></td>
+</tr>
+<tr>
+<td>Korean Parallel corpora</td>
+<td>번역</td>
+<td>번역용 데이터</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/j-min/korean-parallel-corpora">link</a></td>
+</tr>
+<tr>
+<td>KorQuAD 1.0</td>
+<td>MRC</td>
+<td>MRC 데이터</td>
+<td><a target="_blank" rel="noopener" href="https://korquad.github.io/category/1.0_KOR.html">link</a></td>
+</tr>
+<tr>
+<td>KorQuAD 2.1</td>
+<td>MRC</td>
+<td>MRC 큼)</td>
+<td><a target="_blank" rel="noopener" href="https://korquad.github.io/">link</a></td>
+</tr>
+<tr>
+<td>AI데이터</td>
+<td>다양</td>
+<td>법률)</td>
+<td><a target="_blank" rel="noopener" href="http://www.aihub.or.kr/ai_data">link</a></td>
+</tr>
+<tr>
+<td>국립국어원 언어정보나눔터</td>
+<td>다양</td>
+<td>말뭉치)</td>
+<td><a target="_blank" rel="noopener" href="https://ithub.korean.go.kr/user/total/database/corpusManager.do">link</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="한국어-nlp-dataset-모음-2"><a class="markdownIt-Anchor" href="#한국어-nlp-dataset-모음-2"></a> 한국어 NLP dataset 모음</h2>
+<blockquote>
+<p>출처: <a target="_blank" rel="noopener" href="https://sosomemo.tistory.com/21">한국어 NLP dataset 모음</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>코퍼스 명</td>
+<td>용도</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>Naver sentiment movie corpus v1.0</td>
+<td>분류</td>
+<td>네이버 영화 리뷰 (긍정, 부정) 분류 라벨링 됨</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/e9t/nsmc">https://github.com/e9t/nsmc</a></td>
+</tr>
+<tr>
+<td>Chatbot_data</td>
+<td>분류</td>
+<td>채팅 대화 (일상,긍정,부정) 분류 라벨링 됨</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/songys/Chatbot_data">https://github.com/songys/Chatbot_data</a></td>
+</tr>
+<tr>
+<td>청와대 국민청원 사이트의 만료된 청원 데이터 모음</td>
+<td>RAW</td>
+<td>일자,카테고리,제목,내용 등 만료된 청원 Raw 데이터</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/akngs/petitions">https://github.com/akngs/petitions</a></td>
+</tr>
+<tr>
+<td>Korean NER Corpus</td>
+<td>NER</td>
+<td>한국어 NER 용 데이터 (NER, 형태소)</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/machinereading/KoreanNERCorpus">https://github.com/machinereading/KoreanNERCorpus</a></td>
+</tr>
+<tr>
+<td>Korean Parallel corpora</td>
+<td>번역</td>
+<td>번역용 한국어/영어, 한국어/불어 병렬 데이터</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/j-min/korean-parallel-corpora">https://github.com/j-min/korean-parallel-corpora</a></td>
+</tr>
+<tr>
+<td>KorQuAD 1.0</td>
+<td>MRC</td>
+<td>MRC 용 Wikipedia에 대한 질문 답변 데이터</td>
+<td><a target="_blank" rel="noopener" href="https://korquad.github.io/category/1.0_KOR.html">https://korquad.github.io/category/1.0_KOR.html</a></td>
+</tr>
+<tr>
+<td>KorQuAD 2.1</td>
+<td>MRC</td>
+<td>MRC 용 Wikipedia에 대한 질문 답변 데이터 (1.0 보다 데이터가 큼)</td>
+<td><a target="_blank" rel="noopener" href="https://korquad.github.io/">https://korquad.github.io/</a></td>
+</tr>
+<tr>
+<td>AI허브 AI데이터</td>
+<td>다양</td>
+<td>법률,특허,상식,대화 등 다양한 분야의 학습용 데이터 제공 (데이터 신청 별도 해야함)</td>
+<td><a target="_blank" rel="noopener" href="http://www.aihub.or.kr/ai_data">http://www.aihub.or.kr/ai_data</a></td>
+</tr>
+<tr>
+<td>국립국어원 언어정보나눔터</td>
+<td>다양</td>
+<td>말뭉치, 대화 자료등등 방대한 한국어 데이터 제공 (학습을 위해서는 전처리가 많이 필요함)</td>
+<td><a target="_blank" rel="noopener" href="https://ithub.korean.go.kr/user/total/database/corpusManager.do">https://ithub.korean.go.kr/user/total/database/corpusManager.do</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="awesomekoreandata-송영숙"><a class="markdownIt-Anchor" href="#awesomekoreandata-송영숙"></a> AwesomeKoreanData, 송영숙</h2>
+<blockquote>
+<p>출처: <a target="_blank" rel="noopener" href="https://github.com/songys/AwesomeKorean_Data">AwesomeKoreanData, 송영숙</a></p>
+</blockquote>
+<h3 id="awesome_korean_data"><a class="markdownIt-Anchor" href="#awesome_korean_data"></a> Awesome_Korean_Data</h3>
+<blockquote>
+<p>한국어 데이터 세트 링크<br>
+팁: ragsgo 전처리 데이터 <a target="_blank" rel="noopener" href="https://ratsgo.github.io/embedding/preprocess.html">link</a>에서는 한국어 위키피디아를 포함한 전처리 데이터와 위젯을 이용한 데이터 다운로드를 제공하고 있음!</p>
+</blockquote>
+<h3 id="한국어-텍스트-데이터"><a class="markdownIt-Anchor" href="#한국어-텍스트-데이터"></a> 한국어 텍스트 데이터</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">번호</th>
+<th style="text-align:center">데이터 종류</th>
+<th style="text-align:center">링크</th>
+<th style="text-align:center">비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1.</td>
+<td style="text-align:center">한국 정치인 뉴스 데이터 세트</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/lovit/politician_news_dataset">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">2.</td>
+<td style="text-align:center">네이버 뉴스 중 IT/과학 분야에서 50개를 선정해서 요약에 해당하는 문장을 태깅해둔 데이터 세트</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/theeluwin/sci-news-sum-kr-50">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">3.</td>
+<td style="text-align:center">영화추천시스템을 위한 데이터 세트</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/lovit/kmrd">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">4.</td>
+<td style="text-align:center">Naver sentiment movie corpus v1.0(네이버 악평과 선평을 구분해 놓은 데이터)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/e9t/nsmc">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">5.</td>
+<td style="text-align:center">Naver sentiment movie corpus v1.0를 다운 받아서 감성분석 레이블링을 상세화(‘toxic’, ‘obscene’, ‘threat’, ‘insult’, ‘identity_hate’)한 데이터</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/songys/Toxic_comment_data">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">6.</td>
+<td style="text-align:center">Paired Question(질문쌍이 같은 질문인지 다른 질문인지 구별하는 데이터)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/songys/Question_pair">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">7.</td>
+<td style="text-align:center">한국어 개체명 정의 및 표지 표준화 기술보고서와 이를 기반으로 제작된 개체명 형태소 말뭉치</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/kmounlp/NER">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">8.</td>
+<td style="text-align:center">KoreanNERCorpus(개체명 말뭉치)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/machinereading/KoreanNERCorpus">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">9.</td>
+<td style="text-align:center">한국어 NER 사전</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/songys/entity">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">10.1</td>
+<td style="text-align:center">챗봇용 대화 세트</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/songys/Chatbot_data">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">10.2</td>
+<td style="text-align:center">챗봇용 대화 세트와 코드</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/warnikchow/paraKQC">link</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">11.</td>
+<td style="text-align:center">한영/한불 병렬말뭉치(번역용)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/j-min/korean-parallel-corpora">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">12.</td>
+<td style="text-align:center">한영 병렬 말뭉치</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/jungyeul/korean-parallel-corpora">Korean-English parallel corpus</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">13.</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://www1.president.go.kr/petitions">청와대 국민청원</a> 사이트의 <a target="_blank" rel="noopener" href="https://www1.president.go.kr/petitions?only=finished">만료된 청원</a> 데이터 모음</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/akngs/petitions">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">14.</td>
+<td style="text-align:center">공공데이터포털 뉴스빅데이터 분석 정보(뉴스데이터베이스 ‘Kinds’ 기반 분석 자료, 기사 메타정보)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://www.data.go.kr/dataset/15012945/fileData.do">https://www.data.go.kr/dataset/15012945/fileData.do</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">혐오표현 관련 데이터</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://www.kaggle.com/captainnemo9292/korean-extremist-website-womad-hate-speech-data">Hate-speech-data</a></td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>챗봇용 대화 세트와 코드</p>
+<blockquote>
+<p>10.1과 10.2는 거의 겹치는 질문이 없다고 할 만큼 주제가 다르다. 10.1은 "위로해 줘"와 같이 좀 더 사적 담화의 성격이 강하다면 10.2는 “어떤 메일이 더 유용해?” 와 같이 지식인 QnA에 나올 법한 질문들도 많다.</p>
+</blockquote>
+</blockquote>
+<h3 id="회사나-팀에서-구축한-데이터"><a class="markdownIt-Anchor" href="#회사나-팀에서-구축한-데이터"></a> 회사나 팀에서 구축한 데이터</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">번호</th>
+<th style="text-align:center">데이터 종류</th>
+<th style="text-align:center">링크</th>
+<th style="text-align:center">비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1.</td>
+<td style="text-align:center">Kyubyong Park 외(2019), 한국어 Text to Speech 를 위한 데이터</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://www.kaggle.com/bryanpark/korean-single-speaker-speech-dataset?fbclid=IwAR1WltCqIATEfpPsglqNgQm4zv6-rkmLvf7XMTJwuQ8nlRvaLpukZhtRhvw">https://www.kaggle.com/bryanpark/korean-single-speaker-speech-dataset?fbclid=IwAR1WltCqIATEfpPsglqNgQm4zv6-rkmLvf7XMTJwuQ8nlRvaLpukZhtRhvw</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">2.</td>
+<td style="text-align:center">질의 응답용 데이터 KorQuAD 2.0 질문답변 20,000+ 쌍을 포함하여 총 100,000+ 쌍으로 구성된 한국어 Machine Reading Comprehension 데이터 세트</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://korquad.github.io/">link</a></td>
+<td style="text-align:center">KorQuAD 데이터 세트와 관련된 설명 동영상 -&gt; <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ntGwv6Ifoe8">https://www.youtube.com/watch?v=ntGwv6Ifoe8</a></td>
+</tr>
+<tr>
+<td style="text-align:center">3.</td>
+<td style="text-align:center">카카오 브레인에서 발표한 RTE (recognizing text entailment) 데이터 세트</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/kakaobrain/KorNLUDatasets">link</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">AI API·DATA</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="http://aiopen.etri.re.kr/service_dataset.php">http://aiopen.etri.re.kr/service_dataset.php</a></td>
+<td style="text-align:center">자연어처리의 각 단계를 모두 반영하여 표준 가이드와 태깅된 데이터를 제시한다는 장점이 있다.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="국가적-규모에서-구축한-데이터"><a class="markdownIt-Anchor" href="#국가적-규모에서-구축한-데이터"></a> 국가적 규모에서 구축한 데이터</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">번호</th>
+<th style="text-align:center">데이터 종류</th>
+<th style="text-align:center">링크</th>
+<th style="text-align:center">비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1.</td>
+<td style="text-align:center">우리말샘 : 다양한 어휘와 유의어 정보 등을 얻을 수 있는 대사전 : 로그일 필요, 전체 사전 데이터 다운로드 가능</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://opendict.korean.go.kr/main">https://opendict.korean.go.kr/main</a></td>
+<td style="text-align:center">이 사전에 대한 설명 github <a target="_blank" rel="noopener" href="https://github.com/songys/Dictionaries">link</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2.</td>
+<td style="text-align:center">전자 사전 : NIA 사전, 묻지도 따지지도 않고 다음 링크에서 엑셀로 다운로드 가능</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://kbig.kr/portal/kbig/knowledge/files/bigdata_report.page?bltnNo=10000000016451">https://kbig.kr/portal/kbig/knowledge/files/bigdata_report.page?bltnNo=10000000016451</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">3.</td>
+<td style="text-align:center">AIHub : 텍스트와 음성 멀티모달까지 가장 광범위한 데이터, 로그인 및 사용 목적과 기간을 명시한 사용 신청서 작성 후 허가 메일이 오면(하루 정도 걸린다) 다운로드 가능</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="http://aihub.or.kr/">http://aihub.or.kr/</a></td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">4.</td>
+<td style="text-align:center">국립국어원 언어정보나눔터 : 로그인 후 세종2007 말뭉치나 낭독체 음성 파일 등도 다운로드 가능, 다운 받을 때 간단한 서약에 체크만 하면 되는데 자료의 크기를 작게 나누어 놓아서 여러번 체크해야 한다는 것이 단점</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://ithub.korean.go.kr/user/total/database/corpusManager.do">https://ithub.korean.go.kr/user/total/database/corpusManager.do</a></td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="한국어-말뭉치-모음-zetawiki"><a class="markdownIt-Anchor" href="#한국어-말뭉치-모음-zetawiki"></a> 한국어 말뭉치 모음, zetawiki</h2>
+<h3 id="원문"><a class="markdownIt-Anchor" href="#원문"></a> 원문</h3>
+<p><a target="_blank" rel="noopener" href="https://zetawiki.com/wiki/%ED%95%9C%EA%B5%AD%EC%96%B4_%EB%A7%90%EB%AD%89%EC%B9%98_%EB%AA%A8%EC%9D%8C">한국어 말뭉치 모음, zetawiki</a></p>
+<h3 id="내용"><a class="markdownIt-Anchor" href="#내용"></a> 내용</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/songys/Chatbot_data">Chatbot_data</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/songys/Chatbot_data/blob/master/ChatbotData%20.csv">ChatbotData.csv</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.aihub.or.kr/ai_data">AI허브 AI데이터</a><br>
+<a target="_blank" rel="noopener" href="https://ithub.korean.go.kr/user/total/database/corpusManager.do">국립국어원 언어정보나눔터</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/e9t/nsmc/master/ratings.txt">네이버 영화 말뭉치 학습/테스트셋</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/e9t/nsmc/master/ratings_test.txt">네이버 영화 말뭉치 테스트셋</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/e9t/nsmc/master/ratings_train.txt">네이버 영화 말뭉치 학습셋</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/processed_ratings.txt">네이버 영화 말뭉치 학습/테스트셋 (극성 레이블 없음)</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/processed_ratings_test.txt">네이버 영화 말뭉치 테스트셋 (극성 레이블 있음)</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/processed_ratings_train.txt">네이버 영화 말뭉치 학습셋 (극성 레이블 있음)</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/processed_review_movieid.txt">네이버 영화 말뭉치 전체 데이터셋 (영화 ID 포함)</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/soyword.model">네이버 영화 말뭉치로 학습한 soynlp 형태소 분석 모델</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/space-correct.model">네이버 영화 말뭉치로 학습한 띄어쓰기 교정(soynlp) 모델</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://korquad.github.io/">KorQuAD</a><br>
+<a target="_blank" rel="noopener" href="https://korquad.github.io/dataset/KorQuAD_v1.0_dev.json">KorQuAD_v1.0_dev.json</a><br>
+<a target="_blank" rel="noopener" href="https://korquad.github.io/dataset/KorQuAD_v1.0_train.json">KorQuAD_v1.0_train.json</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/processed_korquad.txt">KorQuAD 학습/데브셋</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://dumps.wikimedia.org/kowiki/latest/kowiki-latest-pages-articles.xml.bz2">한국어 위키백과 덤프</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://ratsgo.github.io/embedding/downloaddata.html">ratsgo 전처리 데이터</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/corrected_ratings_corpus.txt">띄어쓰기 교정(soynlp)한 네이버 영화 말뭉치 (레이블 없음)</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/corrected_ratings_test.txt">띄어쓰기 교정(soynlp)한 네이버 영화 말뭉치 테스트셋 (레이블 없음)</a><br>
+<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/jmnote/z-korpus/master/ratsgo-processed/corrected_ratings_train.txt">띄어쓰기 교정(soynlp)한 네이버 영화 말뭉치 학습셋 (레이블 있음)</a></p>
+</blockquote>
+<hr>
+<h2 id="한국어-자연어-처리-데이터셋-목록-아기여우의-자기계발로그"><a class="markdownIt-Anchor" href="#한국어-자연어-처리-데이터셋-목록-아기여우의-자기계발로그"></a> 한국어 자연어 처리 데이터셋 목록, 아기여우의 자기계발로그</h2>
+<blockquote>
+<p>출처: <a target="_blank" rel="noopener" href="https://littlefoxdiary.tistory.com/42">한국어 자연어 처리 데이터셋 목록, 아기여우의 자기계발로그, 2020-05</a></p>
+</blockquote>
+<h3 id="분류-분석-감성분석-의도분류"><a class="markdownIt-Anchor" href="#분류-분석-감성분석-의도분류"></a> 분류 분석 (감성분석/ 의도분류)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>네이버 영화 리뷰</td>
+<td>네이버 영화 리뷰 데이터에 대한 긍/부정 라벨 데이터 - 학습 15만건 / 테스트 5만건</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/e9t/nsmc">github</a></td>
+</tr>
+<tr>
+<td>Toxic Comment Data</td>
+<td>네이버 영화 리뷰 데이터의 라벨을 상세화한 데이터 - toxic / obscene / threat / insult / identity_hate 분류</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/songys/Toxic_comment_data">github</a></td>
+</tr>
+<tr>
+<td>3i4k</td>
+<td>의도분류 학습용 데이터셋 - 문장에 대해 7가지 클래스 라벨 부여 - 논문: <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1811.04231.pdf">https://arxiv.org/pdf/1811.04231.pdf</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/warnikchow/3i4k?fbclid=IwAR17XFnJr_y6lp49z7MwwWOJsyRql5Zwvc0KQxgE7x6DtmV7qELK0ymE__A">github</a></td>
+</tr>
+<tr>
+<td>korean-hage-speech</td>
+<td>한국어 혐오발언 분류 데이터셋 - 연예 뉴스 댓글에 대한 혐오 / 사회적 편견 유무 라벨 데이터 - 사회적 편견은 성별/ 기타/ 없음 세 가지로 분류 - 9,381건(7,896 / 471 / 974)</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/kocohub/korean-hate-speech">github</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="유사도-판별"><a class="markdownIt-Anchor" href="#유사도-판별"></a> 유사도 판별</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>KorNLI</td>
+<td>두 문장의 관계를 entailment/neutral/contradiction 으로 분류 - 학습/ 검증/ 테스트 데이터로 분리되어 있음.</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/kakaobrain/KorNLUDatasets/tree/master/KorNLI">github</a></td>
+</tr>
+<tr>
+<td>KoSTS</td>
+<td>두 문장의 유사도 점수를 라벨링한 데이터 - 학습/ 검증/ 테스트 데이터로 분리되어 있음.</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/kakaobrain/KorNLUDatasets/tree/master/KorSTS">github</a></td>
+</tr>
+<tr>
+<td>Question pair</td>
+<td>두 개의 질문이 같은 질문인지 아닌지 레이블링한 데이터 - 학습 6,888건 / 테스트 688건 제공</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/songys/Question_pair">github</a></td>
+</tr>
+<tr>
+<td>ParaKQC</td>
+<td>10개의 비슷한 문장에 대한 1,000개의 집합으로 구성 - 문장 유사도 데이터 494,500건 생성 가능 - 패러프래이징 데이터 45,000건 생성 가능</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/warnikchow/paraKQC">github</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="자연어-질의응답-기계독해-mrc"><a class="markdownIt-Anchor" href="#자연어-질의응답-기계독해-mrc"></a> 자연어 질의응답 (기계독해 / MRC)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>KorQuAD 1.0</td>
+<td>한국어 기계독해를 위한 표준 데이터셋 - 리더보드 운영중</td>
+<td><a target="_blank" rel="noopener" href="https://korquad.github.io/category/1.0_KOR.html">webpage</a></td>
+</tr>
+<tr>
+<td>KorQuAD 2.0</td>
+<td>구조를 가진 HTML 문서에 대한 기계 독해 데이터셋 - 리더보드 운영중</td>
+<td><a target="_blank" rel="noopener" href="https://korquad.github.io/">webpage</a></td>
+</tr>
+<tr>
+<td>AI HUB 기계독해</td>
+<td>한국어 기계독해를 위한 데이터셋 - SQuAD1.0 / 2.0(no-answer) 타입의 데이터 제공 - 질문 답변과 답변을 선택한 단서 제공</td>
+<td><a target="_blank" rel="noopener" href="http://www.aihub.or.kr/aidata/86">webpage</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="자연어-질의응답-일반-상식"><a class="markdownIt-Anchor" href="#자연어-질의응답-일반-상식"></a> 자연어 질의응답 (일반 상식)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>AI HUB 일반상식 QA</td>
+<td>일반 상식에 대한 {entity, attribute, value} 트리플 질문 -&gt; 답변 -&gt; 제시문에 대한 말뭉치 제공</td>
+<td><a target="_blank" rel="noopener" href="http://www.aihub.or.kr/aidata/84">webpage</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="대화-모델"><a class="markdownIt-Anchor" href="#대화-모델"></a> 대화 모델</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>Chatbot_data</td>
+<td>일상 챗봇 학습용 문답 페어 11,876건 일상(0) / 이별,부정(1) / 사랑,긍정(2) 라벨 부여</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/songys/Chatbot_data">github</a></td>
+</tr>
+<tr>
+<td>AI HUB 한국어대화</td>
+<td>소상공인, 공공민원 관련 10개 분야에 대한 1만건 이상의 데화 데이터셋 - 대화 데이터와 함께 의도(Intent) 라벨링 포함</td>
+<td><a target="_blank" rel="noopener" href="http://www.aihub.or.kr/aidata/85">webpage</a></td>
+</tr>
+<tr>
+<td>클로바 AI Call 데이터</td>
+<td>자동 음성 인식을 위한 Goal-oriented 대화 음성 코퍼스 데이터셋 - 비영리/ 학계 소속 기관은 신청을 통해 다운로드 가능</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/clovaai/ClovaCall?fbclid=IwAR2rL-qcvv4zBVdKxJwulv19Nn8UnG3n_JPzZwIjfk6PVscMgTGZHGi3L2Q">github</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="기타-기계번역-ner-요약"><a class="markdownIt-Anchor" href="#기타-기계번역-ner-요약"></a> 기타 (기계번역 / NER / 요약 / …)</h3>
+<blockquote>
+<p>기계 번역</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>기계 번역 AI HUB 한영 말뭉치</td>
+<td>한국어-영어 160만 문장의 번역 말뭉치 - 문어체, 구어체, 대화체 등 다양한 소스 포함</td>
+<td><a target="_blank" rel="noopener" href="http://www.aihub.or.kr/aidata/87">webpage</a></td>
+</tr>
+<tr>
+<td>기계 번역 korean parallel corpora</td>
+<td>한국어 -영어 번역 한국어 - 프랑스어 번역 데이터 포함</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/j-min/korean-parallel-corpora">github</a></td>
+</tr>
+<tr>
+<td>기계 번역 카이스트 중-한 데이터</td>
+<td>중-한 문장 세트로 구성된 데이터셋 60,000개 문장 포함</td>
+<td><a target="_blank" rel="noopener" href="http://semanticweb.kaist.ac.kr/home/index.php/Corpus9">webpage</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>NER</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>KoreanNERCorpus</td>
+<td>한국어 개체명인식 태스크 수행을 위한 데이터</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/machinereading/KoreanNERCorpus">github</a></td>
+</tr>
+<tr>
+<td>NER</td>
+<td>말뭉치 - 형태소 - 개체명 태깅 데이터셋</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/kmounlp/NER">github</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>텍스트 요약</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>sci-news-sum-kr-50</td>
+<td>네이버 뉴스 중 IT/과학 분야 기사 50개 원문 중 요약에 해당하는 문장을 태깅한 데이터셋</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/theeluwin/sci-news-sum-kr-50">github</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="raw-corpus"><a class="markdownIt-Anchor" href="#raw-corpus"></a> RAW Corpus</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이름</td>
+<td>설명</td>
+<td>링크</td>
+</tr>
+<tr>
+<td>국립국어원 말뭉치</td>
+<td>다양한 분야에 대한 방대한 한국어 raw 코퍼스</td>
+<td><a target="_blank" rel="noopener" href="https://ithub.korean.go.kr/user/total/database/corpusManager.do">webpage</a></td>
+</tr>
+<tr>
+<td>카이스트 코퍼스</td>
+<td>1994~1997년 수집한 70,000,000 어절의 코퍼스</td>
+<td><a target="_blank" rel="noopener" href="http://semanticweb.kaist.ac.kr/home/index.php/Corpus1">webpage</a></td>
+</tr>
+<tr>
+<td>위키피디아 덤프</td>
+<td>한국어 위키피디아 (추출기- <a target="_blank" rel="noopener" href="https://github.com/j-min/WikiExtractor_To_the_one_text">링크</a>)</td>
+<td><a target="_blank" rel="noopener" href="https://dumps.wikimedia.org/kowiki/">webpage</a></td>
+</tr>
+<tr>
+<td>나무위키 덤프</td>
+<td>나무위키 (추출기 - <a target="_blank" rel="noopener" href="https://github.com/j-min/Easy-Namuwiki-Extractor">링크</a>)</td>
+<td><a target="_blank" rel="noopener" href="https://namu.wiki/w/%EB%82%98%EB%AC%B4%EC%9C%84%ED%82%A4:%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EB%8D%A4%ED%94%84">webpage</a></td>
+</tr>
+<tr>
+<td>한국 정치인 관련 뉴스</td>
+<td>한국 정치인 19인에 대한 뉴스 수집 데이터셋</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/lovit/politician_news_dataset">github</a></td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%ED%95%9C%EA%B5%AD%EC%96%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B/" rel="tag"># 한국어 데이터셋</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ckf3rmldu000dk78o0rnx6t2z.html" rel="prev" title="쿠버네티스 설치 기록">
+                  <i class="fa fa-chevron-left"></i> 쿠버네티스 설치 기록
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ckf3rmlj800b5k78ohkij2zk1.html" rel="next" title="embadding">
+                  embadding <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Park Eunjin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+<script src="/bundle.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script></body></html>

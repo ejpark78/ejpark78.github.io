@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+  
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ejpark78.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="Linux 계정 생성 1234567891011export NEW_USER=usersudo useradd -s /bin/bash -m $&amp;#123;NEW_USER&amp;#125;sudo usermod -aG sudo $&amp;#123;NEW_USER&amp;#125; echo &quot;$&amp;#123;NEW_USER&amp;#125; ALL=(ALL:ALL) NOPASSWD:ALL&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 계정 생성, SSH key pair 생성">
+<meta property="og:url" content="https://ejpark78.github.io/ckf3rmley0020k78ohuew5svo.html">
+<meta property="og:site_name" content="오늘은 뭘 배우셨나요?">
+<meta property="og:description" content="Linux 계정 생성 1234567891011export NEW_USER=usersudo useradd -s /bin/bash -m $&amp;#123;NEW_USER&amp;#125;sudo usermod -aG sudo $&amp;#123;NEW_USER&amp;#125; echo &quot;$&amp;#123;NEW_USER&amp;#125; ALL=(ALL:ALL) NOPASSWD:ALL&amp;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-13T00:33:29.000Z">
+<meta property="article:modified_time" content="2020-08-14T01:21:54.338Z">
+<meta property="article:author" content="Park Eunjin">
+<meta property="article:tag" content="설치 기록">
+<meta property="article:tag" content="Linux 계정 생성">
+<meta property="article:tag" content="SSH key pair 생성">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ejpark78.github.io/ckf3rmley0020k78ohuew5svo.html">
+
+
+<script data-pjax="" class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'linux'
+  };
+</script>
+
+  <title>Linux 계정 생성, SSH key pair 생성 | 오늘은 뭘 배우셨나요?</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css');loadCss('//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">오늘은 뭘 배우셨나요?</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">나도 블로그가 있다!!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">63</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">53</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-%EA%B3%84%EC%A0%95-%EC%83%9D%EC%84%B1"><span class="nav-number">1.</span> <span class="nav-text"> Linux 계정 생성</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh-key-pair-%EC%83%9D%EC%84%B1"><span class="nav-number">2.</span> <span class="nav-text"> SSH key pair 생성</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%83%9D%EC%84%B1"><span class="nav-number">3.</span> <span class="nav-text"> 사용자 생성</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9D%B4%EC%8A%88"><span class="nav-number">4.</span> <span class="nav-text"> 이슈</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Park Eunjin</p>
+  <div class="site-description" itemprop="description">적자생존!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmley0020k78ohuew5svo.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 계정 생성, SSH key pair 생성
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-07-13 09:33:29" itemprop="dateCreated datePublished" datetime="2020-07-13T09:33:29+09:00">2020-07-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-14 10:21:54" itemprop="dateModified" datetime="2020-08-14T10:21:54+09:00">2020-08-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/" itemprop="url" rel="index"><span itemprop="name">설치 기록</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/Linux-%EA%B3%84%EC%A0%95-%EC%83%9D%EC%84%B1/" itemprop="url" rel="index"><span itemprop="name">Linux 계정 생성</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/Linux-%EA%B3%84%EC%A0%95-%EC%83%9D%EC%84%B1/SSH-key-pair-%EC%83%9D%EC%84%B1/" itemprop="url" rel="index"><span itemprop="name">SSH key pair 생성</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="linux-계정-생성"><a class="markdownIt-Anchor" href="#linux-계정-생성"></a> Linux 계정 생성</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> NEW_USER=user</span><br><span class="line"></span><br><span class="line">sudo useradd -s /bin/bash -m <span class="variable">${NEW_USER}</span></span><br><span class="line">sudo usermod -aG sudo <span class="variable">${NEW_USER}</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">${NEW_USER}</span> ALL=(ALL:ALL) NOPASSWD:ALL"</span> | sudo tee -a /etc/sudoers</span><br><span class="line"> </span><br><span class="line">sudo cat /etc/sudoers</span><br><span class="line"></span><br><span class="line"><span class="built_in">unset</span> <span class="variable">${NEW_USER}</span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="ssh-key-pair-생성"><a class="markdownIt-Anchor" href="#ssh-key-pair-생성"></a> SSH key pair 생성</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> NEW_USER=user</span><br><span class="line"></span><br><span class="line">sudo su <span class="variable">${NEW_USER}</span></span><br><span class="line"></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"ejpark78@gmail.com"</span></span><br><span class="line"></span><br><span class="line">❯ ls .ssh</span><br><span class="line"><span class="comment"># id_rsa  id_rsa.pub</span></span><br><span class="line"></span><br><span class="line">cat ~/.ssh/id_rsa &gt; ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line">cat ~/.ssh/id_rsa.pub &gt; ~/.ssh/nlp.pem</span><br><span class="line"></span><br><span class="line">chmod 700 ~/.ssh</span><br><span class="line">chmod 600 ~/.ssh/authorized_keys ~/.ssh/id_rsa</span><br><span class="line">chmod 400 ~/.ssh/nlp.pem ~/.ssh/id_rsa.pub</span><br><span class="line"></span><br><span class="line">chmod 700 ~/.ssh</span><br><span class="line">chmod 600 ~/.ssh/authorized_keys </span><br><span class="line">chmod 400 ~/.ssh/nlp.pem </span><br></pre></td></tr></tbody></table></figure>
+<h2 id="사용자-생성"><a class="markdownIt-Anchor" href="#사용자-생성"></a> 사용자 생성</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | tee create-user.sh</span><br><span class="line"><span class="built_in">export</span> NEW_USER=nlp</span><br><span class="line">sudo useradd -s /bin/bash -m \<span class="variable">${NEW_USER}</span></span><br><span class="line">sudo usermod -aG sudo \<span class="variable">${NEW_USER}</span></span><br><span class="line">sudo usermod -aG docker \<span class="variable">${NEW_USER}</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"\${NEW_USER} ALL=(ALL:ALL) NOPASSWD:ALL"</span> | sudo tee -a /etc/sudoers</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">CACHE_SERVER=https://my-cache-server.com/repository</span><br><span class="line"></span><br><span class="line">upload-cache.sh cache create-user.sh</span><br><span class="line">cls tmp <span class="string">'wget "${CACHE_SERVER}/cache/ssh-template.tar.gz"; sudo tar xvfz ssh-template.tar.gz -C /home/${USER}/; sudo ls -lah /home/${USER}/.ssh/'</span></span><br><span class="line"></span><br><span class="line">upload-cache.sh ssh_config ssh.tar.gz</span><br><span class="line">cls tmp <span class="string">'curl "${CACHE_SERVER}/cache/create-user.sh" &gt; create-user.sh'</span></span><br><span class="line">cls tmp <span class="string">'sudo bash create-user.sh'</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="이슈"><a class="markdownIt-Anchor" href="#이슈"></a> 이슈</h2>
+<ul>
+<li>polkit-agent-helper-1: error response to PolicyKit daemon: GDBus.Error:org.freedesktop.PolicyKit1.Error.Failed: No session for cookie 에러</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/799669/etc-sudoers-file-corrupted-and-i-cant-run-pkexec-visudo-over-ssh">/etc/sudoers file corrupted and I can’t run ‘pkexec visudo’ over SSH</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. Open two ssh sessions to the target server.</span><br><span class="line">2. In the first session, get the PID of bash by running:</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> $$</span><br><span class="line"></span><br><span class="line">3. In the second session, start the authentication agent with:</span><br><span class="line"></span><br><span class="line">pkttyagent --process (pid from step 2)</span><br><span class="line"></span><br><span class="line">4. Back <span class="keyword">in</span> the first session, run:</span><br><span class="line"></span><br><span class="line">pkexec visudo</span><br><span class="line"></span><br><span class="line">5. In the second session, you will get the password prompt. visudo will start <span class="keyword">in</span> the first session.</span><br></pre></td></tr></tbody></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/" rel="tag"># 설치 기록</a>
+              <a href="/tags/Linux-%EA%B3%84%EC%A0%95-%EC%83%9D%EC%84%B1/" rel="tag"># Linux 계정 생성</a>
+              <a href="/tags/SSH-key-pair-%EC%83%9D%EC%84%B1/" rel="tag"># SSH key pair 생성</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ckf3rmlia00amk78o2ffie5zw.html" rel="prev" title="helm">
+                  <i class="fa fa-chevron-left"></i> helm
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ckf3rmlf00024k78o7q9ze5ua.html" rel="next" title="RAID 디스크 초기화 방법">
+                  RAID 디스크 초기화 방법 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Park Eunjin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+<script src="/bundle.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script></body></html>

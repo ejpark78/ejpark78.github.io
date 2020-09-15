@@ -1,0 +1,503 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+  
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ejpark78.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="local path 를 storageclass로 사용 1234k apply -f local-path-storage.yaml kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yamlkubectl pat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kubeflow 설치">
+<meta property="og:url" content="https://ejpark78.github.io/ckf3rmleg0013k78o2jn833o2.html">
+<meta property="og:site_name" content="오늘은 뭘 배우셨나요?">
+<meta property="og:description" content="local path 를 storageclass로 사용 1234k apply -f local-path-storage.yaml kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yamlkubectl pat">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-09-15T09:11:54.000Z">
+<meta property="article:modified_time" content="2020-09-15T09:35:21.345Z">
+<meta property="article:author" content="Park Eunjin">
+<meta property="article:tag" content="쿠버네티스">
+<meta property="article:tag" content="kubeflow">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ejpark78.github.io/ckf3rmleg0013k78o2jn833o2.html">
+
+
+<script data-pjax="" class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'infra'
+  };
+</script>
+
+  <title>kubeflow 설치 | 오늘은 뭘 배우셨나요?</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css');loadCss('//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">오늘은 뭘 배우셨나요?</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">나도 블로그가 있다!!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">63</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">53</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#local-path-%EB%A5%BC-storageclass%EB%A1%9C-%EC%82%AC%EC%9A%A9"><span class="nav-number">1.</span> <span class="nav-text"> local path 를 storageclass로 사용</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service-account-token-volume-projection-%ED%99%9C%EC%84%B1%ED%99%94"><span class="nav-number">2.</span> <span class="nav-text"> Service Account Token Volume Projection 활성화</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dynamic-volume-provisioner-%EC%84%A4%EC%B9%98"><span class="nav-number">3.</span> <span class="nav-text"> dynamic volume provisioner 설치</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kubeflow-%EC%84%A4%EC%B9%98"><span class="nav-number">4.</span> <span class="nav-text"> kubeflow 설치</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%8D%B0%EC%89%AC%EB%B3%B4%EB%93%9C"><span class="nav-number">4.1.</span> <span class="nav-text"> 데쉬보드</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%8D%B0%EC%89%AC%EB%B3%B4%EB%93%9C-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%B6%94%EA%B0%80"><span class="nav-number">4.2.</span> <span class="nav-text"> 데쉬보드 사용자 추가</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kubeflow-%EC%82%AD%EC%A0%9C"><span class="nav-number">5.</span> <span class="nav-text"> kubeflow 삭제</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B0%B8%EA%B3%A0"><span class="nav-number">6.</span> <span class="nav-text"> 참고</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Park Eunjin</p>
+  <div class="site-description" itemprop="description">적자생존!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmleg0013k78o2jn833o2.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          kubeflow 설치
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-09-15 18:11:54 / Updated at: 18:35:21" itemprop="dateCreated datePublished" datetime="2020-09-15T18:11:54+09:00">2020-09-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">쿠버네티스</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/kubeflow/" itemprop="url" rel="index"><span itemprop="name">kubeflow</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="local-path-를-storageclass로-사용"><a class="markdownIt-Anchor" href="#local-path-를-storageclass로-사용"></a> local path 를 storageclass로 사용</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">k apply -f <span class="built_in">local</span>-path-storage.yaml </span><br><span class="line">kubectl apply -f https://raw.githubusercontent.com/rancher/<span class="built_in">local</span>-path-provisioner/master/deploy/<span class="built_in">local</span>-path-storage.yaml</span><br><span class="line"></span><br><span class="line">kubectl patch storageclass <span class="built_in">local</span>-path -p <span class="string">'{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="service-account-token-volume-projection-활성화"><a class="markdownIt-Anchor" href="#service-account-token-volume-projection-활성화"></a> Service Account Token Volume Projection 활성화</h2>
+<ul>
+<li>출처: <a target="_blank" rel="noopener" href="https://www.kangwoo.kr/2020/02/18/pc%EC%97%90-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-3%EB%B6%80-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">pc에-kubeflow-설치하기-3부, 지구별 여행자</a></li>
+</ul>
+<p>kubeflow 에서 인증에 사용되는 istio 에서 Service Account Token Volume Projection 기능을 사용함.<br>
+이 기능은 쿠버네티스 1.15 부터 비활성화되어 있음.</p>
+<p>/etc/kubernetes/manifests/kube-apiserver.yaml에서 활성화시킴.</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">❯</span> <span class="string">sudo</span> <span class="string">cat</span> <span class="string">/etc/kubernetes/manifests/kube-apiserver.yaml</span>                                             </span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="string">(...)</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--allow-privileged=true</span></span><br><span class="line"><span class="string">(...)</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--secure-port=6443</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-key-file=/etc/kubernetes/pki/sa.pub</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-signing-key-file=/etc/kubernetes/pki/sa.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-issuer=api</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-api-audiences=api,vault</span></span><br><span class="line"><span class="string">(...)</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">k8s.gcr.io/kube-apiserver:v1.19.1</span></span><br><span class="line"><span class="string">(...)</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="dynamic-volume-provisioner-설치"><a class="markdownIt-Anchor" href="#dynamic-volume-provisioner-설치"></a> dynamic volume provisioner 설치</h2>
+<ul>
+<li>출처: <a target="_blank" rel="noopener" href="https://www.kangwoo.kr/2020/02/18/pc%EC%97%90-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-3%EB%B6%80-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">pc에-kubeflow-설치하기-3부, 지구별 여행자</a></li>
+</ul>
+<p>kubeflow를 쉽게 설치하기 위해서는 동적 볼륨 프로비져너(dynamic volume provisioner)가 필요함.</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/rancher/<span class="built_in">local</span>-path-provisioner/master/deploy/<span class="built_in">local</span>-path-storage.yaml</span><br><span class="line"></span><br><span class="line">kubectl apply -f <span class="built_in">local</span>-path-storage.yaml</span><br></pre></td></tr></tbody></table></figure>
+<p>local-path-storage.yaml 에서 경로를 수정</p>
+<ul>
+<li>참고: <a target="_blank" rel="noopener" href="https://github.com/rancher/local-path-provisioner">Local Path Provisioner, rancher</a></li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">(...)</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">local-path-config</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">local-path-storage</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">config.json:</span> <span class="string">|-</span></span><br><span class="line">        {</span><br><span class="line">          <span class="string">"nodePathMap"</span><span class="string">:</span>[</span><br><span class="line">            {</span><br><span class="line">                    <span class="string">"node"</span><span class="string">:"DEFAULT_PATH_FOR_NON_LISTED_NODES"</span>,</span><br><span class="line">                    <span class="string">"paths"</span><span class="string">:</span>[<span class="string">"/home/local-path-provisioner"</span>]</span><br><span class="line">            },</span><br><span class="line">            {</span><br><span class="line">                    <span class="string">"node"</span><span class="string">:"node1"</span>,</span><br><span class="line">                    <span class="string">"paths"</span><span class="string">:</span>[<span class="string">"/data3/local-path-provisioner"</span>]</span><br><span class="line">            }</span><br><span class="line">          ]</span><br><span class="line">        }</span><br><span class="line">  <span class="attr">setup:</span> <span class="string">|-</span></span><br><span class="line"><span class="string">(...)</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="kubeflow-설치"><a class="markdownIt-Anchor" href="#kubeflow-설치"></a> kubeflow 설치</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="string">"<span class="variable">${HOME}</span>/usr/k8s"</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">export</span> KF_NAME=<span class="string">"kubeflow"</span></span><br><span class="line"><span class="built_in">export</span> BASE_DIR=<span class="string">"<span class="variable">${HOME}</span>"</span></span><br><span class="line"><span class="built_in">export</span> KF_DIR=<span class="variable">${BASE_DIR}</span>/<span class="variable">${KF_NAME}</span></span><br><span class="line"> </span><br><span class="line">mkdir -p <span class="variable">${KF_DIR}</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">${KF_DIR}</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> CONFIG_URI=<span class="string">"https://raw.githubusercontent.com/kubeflow/manifests/v1.1-branch/kfdef/kfctl_k8s_istio.v1.0.0.yaml"</span></span><br><span class="line"><span class="built_in">export</span> CONFIG_URI=<span class="string">"https://raw.githubusercontent.com/kubeflow/manifests/v1.1-branch/kfdef/kfctl_k8s_istio.v1.1.0.yaml"</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">export</span> CONFIG_URI=<span class="string">"https://raw.githubusercontent.com/kubeflow/manifests/v1.0-branch/kfdef/kfctl_istio_dex.v1.0.1.yaml"</span></span><br><span class="line"><span class="built_in">export</span> CONFIG_URI=<span class="string">"https://raw.githubusercontent.com/kubeflow/manifests/v1.0-branch/kfdef/kfctl_istio_dex.v1.0.2.yaml"</span></span><br><span class="line"> </span><br><span class="line">kfctl build -V -f <span class="variable">${CONFIG_URI}</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">export</span> CONFIG_FILE=<span class="string">"<span class="variable">${KF_DIR}</span>/kfctl_istio_dex.v1.0.1.yaml"</span></span><br><span class="line"> </span><br><span class="line">kfctl apply -V -f <span class="variable">${CONFIG_FILE}</span></span><br><span class="line"> </span><br><span class="line">kubectl -n kubeflow get all</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="데쉬보드"><a class="markdownIt-Anchor" href="#데쉬보드"></a> 데쉬보드</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n istio-system get service istio-ingressgateway</span><br></pre></td></tr></tbody></table></figure>
+<p>서비스 타입이 NodePort 이고, 80번 포트가 31380이라는 노드 포트로 열려있습니다.<br>
+브라우저를 실행하고, 해당 포트로 접속해보겠습니다.</p>
+<p>사용자 이름은 <a href="mailto:admin@kubeflow.org">admin@kubeflow.org</a> 이고, 비밀번호는 12341234 입니다.</p>
+<h3 id="데쉬보드-사용자-추가"><a class="markdownIt-Anchor" href="#데쉬보드-사용자-추가"></a> 데쉬보드 사용자 추가</h3>
+<ul>
+<li>출처: <a target="_blank" rel="noopener" href="http://www.yes24.com/Product/Goods/89494414">큐브플로우, 이명환 2020-03</a></li>
+</ul>
+<p>Dex 버전은 기본 인증이 Basic Auth로 설정되어 있습니다.<br>
+auth 네임스페이스의 dex란 이름의 configmap에서 로그인 정보를 관리합니다.<br>
+staticPassword영역에 같은 형태로 추가하면 됩니다.<br>
+hash 영역은 사용하고자 하는 비밀번호를 넣습니다.<br>
+비밀번호는 bcrypt(<a target="_blank" rel="noopener" href="https://passwordhashing.com/BCrypt">https://passwordhashing.com/BCrypt</a>)로 해쉬된 텍스트이어야 합니다.</p>
+<ul>
+<li>사용자 인증 정보가 담긴 configmap에서 data.confg .yaml 영역만 추출</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">kubectl get configmap/dex -n auth -o jsonpath=<span class="string">'{.data.config\.yaml}'</span> &gt; dex-config.yaml</span><br><span class="line">cat dex-config.yaml</span><br><span class="line"></span><br><span class="line">issuer: http://dex.auth.svc.cluster.local:5556/dex</span><br><span class="line">storage:</span><br><span class="line">  <span class="built_in">type</span>: kubernetes</span><br><span class="line">  config:</span><br><span class="line">    inCluster: <span class="literal">true</span></span><br><span class="line">web:</span><br><span class="line">  http: 0.0.0.0:5556</span><br><span class="line">logger:</span><br><span class="line">  level: <span class="string">"debug"</span></span><br><span class="line">  format: text</span><br><span class="line">oauth2:</span><br><span class="line">  skipApprovalScreen: <span class="literal">true</span></span><br><span class="line">enablePasswordDB: <span class="literal">true</span></span><br><span class="line">staticPasswords:</span><br><span class="line">- email: admin@kubeflow.org</span><br><span class="line">  <span class="built_in">hash</span>: <span class="variable">$2y</span><span class="variable">$12</span><span class="variable">$ruoM7FqXrpVgaol44eRZW</span>.4HWS8SAvg6KYVVSCIwKQPBmTpCm.EeO</span><br><span class="line">  username: admin</span><br><span class="line">  userID: 08a8684b-db88-4b73-90a9-3cd1661f5466</span><br><span class="line">- email: user@local.local</span><br><span class="line">  <span class="built_in">hash</span>: <span class="variable">$2y</span><span class="variable">$12</span><span class="variable">$ruoM7FqXrpVgaol44eRZW</span>.4HWS8SAvg6KYVVSCIwKQPBmTpCm.EeO</span><br><span class="line">  username: user</span><br><span class="line">staticClients:</span><br><span class="line">- id: kubeflow-oidc-authservice</span><br><span class="line">  redirectURIs: [<span class="string">"/login/oidc"</span>]</span><br><span class="line">  name: <span class="string">'Dex Login Application'</span></span><br><span class="line">  secret: pUBnBOY80SnXgjibTYM9ZWNzY2xreNGQok</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="kubeflow-삭제"><a class="markdownIt-Anchor" href="#kubeflow-삭제"></a> kubeflow 삭제</h2>
+<ul>
+<li>출처: <a target="_blank" rel="noopener" href="https://github.com/mojokb/kubeflow-book/blob/master/uninstall/kubeflow-uninstall.txt">kubeflow-uninstall</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">kfctl delete -f <span class="variable">${CONFIG_FILE}</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># https://github.com/mojokb/kubeflow-book/blob/master/uninstall/kubeflow-uninstall.txt</span></span><br><span class="line"> </span><br><span class="line">$ kfctl delete -f kfctl_istio-blah.yaml</span><br><span class="line"><span class="comment"># 실행하면 namespace가 finalizer 때문에 Terminating 상태로 멈추어 있습니다.</span></span><br><span class="line"><span class="comment"># 그래서 아래와 같이 finalizer를 해제 해주어야 합니다.</span></span><br><span class="line"> </span><br><span class="line">kubectl proxy &amp;</span><br><span class="line"> </span><br><span class="line">NAMESPACE=kubeflow</span><br><span class="line">kubectl get namespace <span class="variable">$NAMESPACE</span> -o json |jq <span class="string">'.spec = {"finalizers":[]}'</span> &gt;temp.json</span><br><span class="line">curl -k -H <span class="string">"Content-Type: application/json"</span> -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/<span class="variable">$NAMESPACE</span>/finalize</span><br><span class="line"> </span><br><span class="line">NAMESPACE=cert-manager</span><br><span class="line">kubectl get namespace <span class="variable">$NAMESPACE</span> -o json |jq <span class="string">'.spec = {"finalizers":[]}'</span> &gt;temp.json</span><br><span class="line">curl -k -H <span class="string">"Content-Type: application/json"</span> -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/<span class="variable">$NAMESPACE</span>/finalize</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># 그리고 그 외의 남아있는 리소스들을 처리해주어야 하는데요. 아래와 같이 순서대로 정리해 줍니다.</span></span><br><span class="line"><span class="comment"># 진행하다보면 순서에 따라서 finalizer로 보호되어 있는 리소스들이 발생합니다.</span></span><br><span class="line"><span class="comment"># 그럴 경우 해당 리소스를 edit하여 finalizer의 값을 []로 바꾸어준 후 다시 실행시키면 됩니다 :&gt;</span></span><br><span class="line"> </span><br><span class="line">kubectl delete clusterroles        katib-controller katib-ui ml-pipeline-persistenceagent ml-pipeline-viewer-controller-role pipeline-runner</span><br><span class="line">kubectl delete clusterrolebindings katib-controller katib-ui ml-pipeline-persistenceagent ml-pipeline-scheduledworkflow ml-pipeline-viewer-crd-role-binding pipeline-runner</span><br><span class="line"> </span><br><span class="line">kubectl delete admission-webhook-mutating-webhook-configuration experiment-mutating-webhook-config istio-sidecar-injector mutating-webhook-configuration</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> labels <span class="keyword">in</span> app.kubernetes.io/part-of=kubeflow kustomize.component; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$labels</span></span><br><span class="line">  kubectl api-resources --verbs=list -o name  | grep -v <span class="string">'^componentstatuses$'</span> \</span><br><span class="line">    | xargs -n 1 kubectl delete --all-namespaces --ignore-not-found -l app.kubernetes.io/part-of=kubeflow</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"> </span><br><span class="line">kubectl delete crd applications.app.k8s.io</span><br><span class="line">kubectl get configmap -o name -n kube-system | egrep <span class="string">'cert-manager'</span>|xargs kubectl delete -n kube-system</span><br><span class="line"> </span><br><span class="line">kubectl get mutatingwebhookconfiguration -o name | egrep <span class="string">'kubeflow|katib'</span>|xargs kubectl delete</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 만약 쿠브플로우를 설치하시면서 istio-system 도 같이 설치하셨다면 'kubeflow|dex|istio'로 변경</span></span><br><span class="line">kubectl get crd -o name| egrep <span class="string">'kubeflow|dex|certmanager|cert-manager|applications.app.k8s.io'</span>|xargs kubectl delete</span><br><span class="line">kubectl get clusterrole -o name| egrep <span class="string">'kubeflow|dex'</span>|xargs kubectl delete</span><br><span class="line">kubectl get clusterrolebinding -o name| egrep <span class="string">'kubeflow|dex'</span>|xargs kubectl delete</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.kangwoo.kr/2020/02/17/pc%EC%97%90-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-2%EB%B6%80-kubernetes-nvidia-device-plugin-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">pc에-kubeflow-설치하기-2부-kubernetes-nvidia-device-plugin-설치하기, 지구별 여행자</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/" rel="tag"># 쿠버네티스</a>
+              <a href="/tags/kubeflow/" rel="tag"># kubeflow</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ckf3rmlff002zk78oaqlh9vfv.html" rel="prev" title="mathpix 이미지로된 수식을 LaTex 로 변환">
+                  <i class="fa fa-chevron-left"></i> mathpix 이미지로된 수식을 LaTex 로 변환
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ckf3rmled000yk78o1vdybd70.html" rel="next" title="고립망(DMZ)에 lens metrics 설치 방법">
+                  고립망(DMZ)에 lens metrics 설치 방법 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Park Eunjin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+<script src="/bundle.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script></body></html>

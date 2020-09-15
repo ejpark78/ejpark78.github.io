@@ -1,0 +1,767 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+  
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ejpark78.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="facebookresearch: XLM github Cross-lingual Language Model Pretraining   facebookresearch: MUSE(Multilingual Unsupervised and Supervised Embeddings) github  Download We provide multilingual embedding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="embadding">
+<meta property="og:url" content="https://ejpark78.github.io/ckf3rmlj800b5k78ohkij2zk1.html">
+<meta property="og:site_name" content="오늘은 뭘 배우셨나요?">
+<meta property="og:description" content="facebookresearch: XLM github Cross-lingual Language Model Pretraining   facebookresearch: MUSE(Multilingual Unsupervised and Supervised Embeddings) github  Download We provide multilingual embedding">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-08-07T10:02:46.000Z">
+<meta property="article:modified_time" content="2020-08-14T05:32:13.834Z">
+<meta property="article:author" content="Park Eunjin">
+<meta property="article:tag" content="임베딩">
+<meta property="article:tag" content="딥러닝">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ejpark78.github.io/ckf3rmlj800b5k78ohkij2zk1.html">
+
+
+<script data-pjax="" class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'study'
+  };
+</script>
+
+  <title>embadding | 오늘은 뭘 배우셨나요?</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css');loadCss('//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">오늘은 뭘 배우셨나요?</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">나도 블로그가 있다!!!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">60</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">63</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">53</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#facebookresearch-xlm"><span class="nav-number">1.</span> <span class="nav-text"> facebookresearch: XLM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#facebookresearch-musemultilingual-unsupervised-and-supervised-embeddings"><span class="nav-number">2.</span> <span class="nav-text"> facebookresearch: MUSE(Multilingual Unsupervised and Supervised Embeddings)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#download"><span class="nav-number">2.1.</span> <span class="nav-text"> Download</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multilingual-word-embeddings"><span class="nav-number">2.2.</span> <span class="nav-text"> Multilingual word Embeddings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ground-truth-bilingual-dictionaries"><span class="nav-number">2.3.</span> <span class="nav-text"> Ground-truth bilingual dictionaries</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Park Eunjin</p>
+  <div class="site-description" itemprop="description">적자생존!</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlj800b5k78ohkij2zk1.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          embadding
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-07 19:02:46" itemprop="dateCreated datePublished" datetime="2020-08-07T19:02:46+09:00">2020-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-14 14:32:13" itemprop="dateModified" datetime="2020-08-14T14:32:13+09:00">2020-08-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%9E%84%EB%B2%A0%EB%94%A9/" itemprop="url" rel="index"><span itemprop="name">임베딩</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%9E%84%EB%B2%A0%EB%94%A9/%EB%94%A5%EB%9F%AC%EB%8B%9D/" itemprop="url" rel="index"><span itemprop="name">딥러닝</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<h2 id="facebookresearch-xlm"><a class="markdownIt-Anchor" href="#facebookresearch-xlm"></a> facebookresearch: XLM</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/XLM">github</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1901.07291">Cross-lingual Language Model Pretraining</a></p>
+<hr>
+<h2 id="facebookresearch-musemultilingual-unsupervised-and-supervised-embeddings"><a class="markdownIt-Anchor" href="#facebookresearch-musemultilingual-unsupervised-and-supervised-embeddings"></a> facebookresearch: MUSE(Multilingual Unsupervised and Supervised Embeddings)</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/MUSE">github</a></p>
+<h3 id="download"><a class="markdownIt-Anchor" href="#download"></a> Download</h3>
+<p>We provide multilingual embeddings and ground-truth bilingual dictionaries. These embeddings are fastText embeddings that have been aligned in a common space.</p>
+<h3 id="multilingual-word-embeddings"><a class="markdownIt-Anchor" href="#multilingual-word-embeddings"></a> Multilingual word Embeddings</h3>
+<p>We release fastText Wikipedia <strong>supervised</strong> word embeddings for <strong>30</strong> languages, aligned in a <strong>single vector space</strong>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arabic: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.ar.vec"><em>text</em></a></td>
+<td>Bulgarian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.bg.vec"><em>text</em></a></td>
+<td>Catalan: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.ca.vec"><em>text</em></a></td>
+<td>Croatian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.hr.vec"><em>text</em></a></td>
+<td>Czech: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.cs.vec"><em>text</em></a></td>
+<td>Danish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.da.vec"><em>text</em></a></td>
+</tr>
+<tr>
+<td>Dutch: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.nl.vec"><em>text</em></a></td>
+<td>English: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.en.vec"><em>text</em></a></td>
+<td>Estonian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.et.vec"><em>text</em></a></td>
+<td>Finnish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.fi.vec"><em>text</em></a></td>
+<td>French: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.fr.vec"><em>text</em></a></td>
+<td>German: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.de.vec"><em>text</em></a></td>
+</tr>
+<tr>
+<td>Greek: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.el.vec"><em>text</em></a></td>
+<td>Hebrew: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.he.vec"><em>text</em></a></td>
+<td>Hungarian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.hu.vec"><em>text</em></a></td>
+<td>Indonesian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.id.vec"><em>text</em></a></td>
+<td>Italian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.it.vec"><em>text</em></a></td>
+<td>Macedonian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.mk.vec"><em>text</em></a></td>
+</tr>
+<tr>
+<td>Norwegian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.no.vec"><em>text</em></a></td>
+<td>Polish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.pl.vec"><em>text</em></a></td>
+<td>Portuguese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.pt.vec"><em>text</em></a></td>
+<td>Romanian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.ro.vec"><em>text</em></a></td>
+<td>Russian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.ru.vec"><em>text</em></a></td>
+<td>Slovak: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.sk.vec"><em>text</em></a></td>
+</tr>
+<tr>
+<td>Slovenian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.sl.vec"><em>text</em></a></td>
+<td>Spanish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.es.vec"><em>text</em></a></td>
+<td>Swedish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.sv.vec"><em>text</em></a></td>
+<td>Turkish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.tr.vec"><em>text</em></a></td>
+<td>Ukrainian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.uk.vec"><em>text</em></a></td>
+<td>Vietnamese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/vectors/wiki.multi.vi.vec"><em>text</em></a></td>
+</tr>
+</tbody>
+</table>
+<p>You can visualize crosslingual nearest neighbors using <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/MUSE/blob/master/demo.ipynb"><strong>demo.ipynb</strong></a>.</p>
+<h3 id="ground-truth-bilingual-dictionaries"><a class="markdownIt-Anchor" href="#ground-truth-bilingual-dictionaries"></a> Ground-truth bilingual dictionaries</h3>
+<p>We created <strong>110 large-scale ground-truth bilingual dictionaries</strong> using an internal translation tool. The dictionaries handle well the polysemy of words. We provide a train and test split of 5000 and 1500 unique source words, as well as a larger set of up to 100k pairs. Our goal is to <em>ease the development and the evaluation of cross-lingual word embeddings and multilingual NLP</em>.</p>
+<p><strong>European languages in every direction</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">src-tgt</th>
+<th style="text-align:center">German</th>
+<th style="text-align:center">English</th>
+<th style="text-align:center">Spanish</th>
+<th style="text-align:center">French</th>
+<th style="text-align:center">Italian</th>
+<th style="text-align:center">Portuguese</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">German</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-en.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-es.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-es.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-es.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-fr.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-fr.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-fr.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-it.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-it.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-it.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-pt.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-pt.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-pt.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td style="text-align:center">English</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-de.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-de.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-de.5000-6500.txt">test</a></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-es.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-es.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-es.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fr.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fr.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fr.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-it.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-it.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-it.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pt.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pt.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pt.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Spanish</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-de.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-de.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-de.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-en.5000-6500.txt">test</a></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-fr.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-fr.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-fr.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-it.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-it.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-it.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-pt.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-pt.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-pt.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td style="text-align:center">French</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-de.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-de.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-de.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-en.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-es.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-es.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-es.5000-6500.txt">test</a></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-it.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-it.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-it.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-pt.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-pt.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-pt.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Italian</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-de.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-de.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-de.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-en.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-es.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-es.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-es.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-fr.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-fr.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-fr.5000-6500.txt">test</a></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-pt.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-pt.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-pt.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Portuguese</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-de.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-de.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-de.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-en.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-es.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-es.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-es.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-fr.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-fr.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-fr.5000-6500.txt">test</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-it.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-it.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-it.5000-6500.txt">test</a></td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other languages to English (e.g. {fr,es}-en)</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Afrikaans: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/af-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/af-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/af-en.5000-6500.txt">test</a></td>
+<td>Albanian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sq-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sq-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sq-en.5000-6500.txt">test</a></td>
+<td>Arabic: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ar-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ar-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ar-en.5000-6500.txt">test</a></td>
+<td>Bengali: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Bosnian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bs-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bs-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bs-en.5000-6500.txt">test</a></td>
+<td>Bulgarian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bg-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bg-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/bg-en.5000-6500.txt">test</a></td>
+<td>Catalan: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ca-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ca-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ca-en.5000-6500.txt">test</a></td>
+<td>Chinese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/zh-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/zh-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/zh-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Croatian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hr-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hr-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hr-en.5000-6500.txt">test</a></td>
+<td>Czech: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/cs-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/cs-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/cs-en.5000-6500.txt">test</a></td>
+<td>Danish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/da-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/da-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/da-en.5000-6500.txt">test</a></td>
+<td>Dutch: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/nl-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/nl-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/nl-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>English: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-en.5000-6500.txt">test</a></td>
+<td>Estonian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/et-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/et-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/et-en.5000-6500.txt">test</a></td>
+<td>Filipino: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/tl-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/tl-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/tl-en.5000-6500.txt">test</a></td>
+<td>Finnish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fi-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fi-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fi-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>French: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fr-en.5000-6500.txt">test</a></td>
+<td>German: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/de-en.5000-6500.txt">test</a></td>
+<td>Greek: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/el-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/el-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/el-en.5000-6500.txt">test</a></td>
+<td>Hebrew: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/he-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/he-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/he-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Hindi: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hi-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hi-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hi-en.5000-6500.txt">test</a></td>
+<td>Hungarian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hu-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hu-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/hu-en.5000-6500.txt">test</a></td>
+<td>Indonesian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/id-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/id-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/id-en.5000-6500.txt">test</a></td>
+<td>Italian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/it-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Japanese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ja-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ja-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ja-en.5000-6500.txt">test</a></td>
+<td>Korean: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ko-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ko-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ko-en.5000-6500.txt">test</a></td>
+<td>Latvian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/lv-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/lv-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/lv-en.5000-6500.txt">test</a></td>
+<td>Littuanian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/lt-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/lt-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/lt-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Macedonian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/mk-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/mk-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/mk-en.5000-6500.txt">test</a></td>
+<td>Malay: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ms-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ms-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ms-en.5000-6500.txt">test</a></td>
+<td>Norwegian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/no-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/no-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/no-en.5000-6500.txt">test</a></td>
+<td>Persian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fa-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fa-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/fa-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Polish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pl-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pl-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pl-en.5000-6500.txt">test</a></td>
+<td>Portuguese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/pt-en.5000-6500.txt">test</a></td>
+<td>Romanian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ro-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ro-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ro-en.5000-6500.txt">test</a></td>
+<td>Russian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ru-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ru-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ru-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Slovak: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sk-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sk-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sk-en.5000-6500.txt">test</a></td>
+<td>Slovenian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sl-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sl-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sl-en.5000-6500.txt">test</a></td>
+<td>Spanish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/es-en.5000-6500.txt">test</a></td>
+<td>Swedish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sv-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sv-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/sv-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Tamil: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ta-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ta-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/ta-en.5000-6500.txt">test</a></td>
+<td>Thai: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/th-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/th-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/th-en.5000-6500.txt">test</a></td>
+<td>Turkish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/tr-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/tr-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/tr-en.5000-6500.txt">test</a></td>
+<td>Ukrainian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/uk-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/uk-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/uk-en.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Vietnamese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/vi-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/vi-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/vi-en.5000-6500.txt">test</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>English to other languages (e.g. en-{fr,es})</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Afrikaans: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-af.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-af.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-af.5000-6500.txt">test</a></td>
+<td>Albanian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sq.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sq.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sq.5000-6500.txt">test</a></td>
+<td>Arabic: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ar.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ar.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ar.5000-6500.txt">test</a></td>
+<td>Bengali: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bn.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bn.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bn.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Bosnian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bs.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bs.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bs.5000-6500.txt">test</a></td>
+<td>Bulgarian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bg.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bg.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-bg.5000-6500.txt">test</a></td>
+<td>Catalan: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ca.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ca.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ca.5000-6500.txt">test</a></td>
+<td>Chinese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-zh.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-zh.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-zh.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Croatian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hr.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hr.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hr.5000-6500.txt">test</a></td>
+<td>Czech: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-cs.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-cs.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-cs.5000-6500.txt">test</a></td>
+<td>Danish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-da.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-da.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-da.5000-6500.txt">test</a></td>
+<td>Dutch: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-nl.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-nl.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-nl.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>English: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-en.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-en.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-en.5000-6500.txt">test</a></td>
+<td>Estonian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-et.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-et.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-et.5000-6500.txt">test</a></td>
+<td>Filipino: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-tl.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-tl.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-tl.5000-6500.txt">test</a></td>
+<td>Finnish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fi.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fi.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fi.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>French: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fr.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fr.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fr.5000-6500.txt">test</a></td>
+<td>German: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-de.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-de.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-de.5000-6500.txt">test</a></td>
+<td>Greek: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-el.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-el.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-el.5000-6500.txt">test</a></td>
+<td>Hebrew: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-he.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-he.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-he.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Hindi: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hi.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hi.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hi.5000-6500.txt">test</a></td>
+<td>Hungarian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hu.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hu.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-hu.5000-6500.txt">test</a></td>
+<td>Indonesian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-id.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-id.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-id.5000-6500.txt">test</a></td>
+<td>Italian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-it.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-it.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-it.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Japanese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ja.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ja.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ja.5000-6500.txt">test</a></td>
+<td>Korean: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ko.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ko.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ko.5000-6500.txt">test</a></td>
+<td>Latvian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-lv.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-lv.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-lv.5000-6500.txt">test</a></td>
+<td>Littuanian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-lt.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-lt.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-lt.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Macedonian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-mk.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-mk.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-mk.5000-6500.txt">test</a></td>
+<td>Malay: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ms.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ms.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ms.5000-6500.txt">test</a></td>
+<td>Norwegian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-no.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-no.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-no.5000-6500.txt">test</a></td>
+<td>Persian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fa.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fa.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-fa.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Polish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pl.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pl.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pl.5000-6500.txt">test</a></td>
+<td>Portuguese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pt.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pt.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-pt.5000-6500.txt">test</a></td>
+<td>Romanian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ro.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ro.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ro.5000-6500.txt">test</a></td>
+<td>Russian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ru.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ru.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ru.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Slovak: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sk.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sk.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sk.5000-6500.txt">test</a></td>
+<td>Slovenian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sl.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sl.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sl.5000-6500.txt">test</a></td>
+<td>Spanish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-es.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-es.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-es.5000-6500.txt">test</a></td>
+<td>Swedish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sv.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sv.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-sv.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Tamil: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ta.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ta.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-ta.5000-6500.txt">test</a></td>
+<td>Thai: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-th.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-th.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-th.5000-6500.txt">test</a></td>
+<td>Turkish: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-tr.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-tr.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-tr.5000-6500.txt">test</a></td>
+<td>Ukrainian: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-uk.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-uk.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-uk.5000-6500.txt">test</a></td>
+</tr>
+<tr>
+<td>Vietnamese: <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-vi.txt">full</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-vi.0-5000.txt">train</a> <a target="_blank" rel="noopener" href="https://dl.fbaipublicfiles.com/arrival/dictionaries/en-vi.5000-6500.txt">test</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%EC%9E%84%EB%B2%A0%EB%94%A9/" rel="tag"># 임베딩</a>
+              <a href="/tags/%EB%94%A5%EB%9F%AC%EB%8B%9D/" rel="tag"># 딥러닝</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ckf3rmlic00apk78o8yk5dvkd.html" rel="prev" title="한국어 데이터셋">
+                  <i class="fa fa-chevron-left"></i> 한국어 데이터셋
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ckf3rmlib00ank78o5lk37069.html" rel="next" title="bookmarks">
+                  bookmarks <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Park Eunjin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+      
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+<script src="/bundle.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script></body></html>

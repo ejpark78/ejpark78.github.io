@@ -130,17 +130,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">60</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">61</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">63</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">52</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">53</span></a>
 
   </li>
   </ul>
@@ -185,20 +185,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">태그</span></a>
       </div>
   </nav>
@@ -233,8 +233,8 @@
       
   
   
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla8h00369e8oh19warkg.html">
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlfa002pk78o43uodi1e.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -251,7 +251,114 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla8h00369e8oh19warkg.html" class="post-title-link" itemprop="url">ceph 마스터 하기</a>
+            <a href="/ckf3rmlfa002pk78o43uodi1e.html" class="post-title-link" itemprop="url">tar, pv, split 으로 백업 압축, mv 진행 상황 표시</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-20 10:20:04" itemprop="dateCreated datePublished" datetime="2020-08-20T10:20:04+09:00">2020-08-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-21 15:14:09" itemprop="dateModified" datetime="2020-08-21T15:14:09+09:00">2020-08-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EB%A6%AC%EB%88%85%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">리눅스</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EB%A6%AC%EB%88%85%EC%8A%A4/%EB%B0%B1%EC%97%85-%EC%95%95%EC%B6%95/" itemprop="url" rel="index"><span itemprop="name">백업 압축</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="pv-설치"><a class="markdownIt-Anchor" href="#pv-설치"></a> pv 설치</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install pv</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="압축-생성-및-파일-분리"><a class="markdownIt-Anchor" href="#압축-생성-및-파일-분리"></a> 압축 생성 및 파일 분리</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SIZE=20G</span><br><span class="line">DIR_NAME=backup</span><br><span class="line"></span><br><span class="line">tar -cf - <span class="variable">${DIR_NAME}</span>/* | (pv -p --timer --rate --bytes | split -d -a 3 -b <span class="variable">${SIZE}</span> - <span class="variable">${DIR_NAME}</span>.)</span><br><span class="line"></span><br><span class="line">53.6GiB 0:10:35 [ 138MiB/s] [            &lt;=&gt;                               ]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="sync-상태-파악-방법"><a class="markdownIt-Anchor" href="#sync-상태-파악-방법"></a> sync 상태 파악 방법</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/48235/can-i-watch-the-progress-of-a-sync-operation">Can I watch the progress of a sync operation?</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch -d grep -e Dirty: -e Writeback: /proc/meminfo</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="progress-로-파일-이동-상태-확인"><a class="markdownIt-Anchor" href="#progress-로-파일-이동-상태-확인"></a> progress 로 파일 이동 상태 확인</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Xfennec/progress">progress</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">❯ sudo apt install progress</span><br><span class="line"></span><br><span class="line">❯ watch -n 5 -d progress -q</span><br><span class="line"></span><br><span class="line">[1705505] mv /home/ejpark/backup-part.000</span><br><span class="line">        56.8% (11.4 GiB / 20 GiB)</span><br><span class="line"></span><br><span class="line">[1465881] adb /tmp/adb.1000.log</span><br><span class="line">        100.0% (5.2 KiB / 5.2 KiB)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.tecmint.com/split-large-tar-into-multiple-files-of-certain-size/">How to Split Large tar Archive into Multiple Files of Certain Size</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.tecmint.com/monitor-copy-backup-tar-progress-in-linux-using-pv-command/">How to Monitor Progress of (Copy/Backup/Compress) Data using pv Command</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/2577/how-can-i-move-files-and-view-the-progress-e-g-with-a-progress-bar">How can I move files and view the progress (e.g. with a progress bar)?</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://m.blog.naver.com/PostView.nhn?blogId=jevida&amp;logNo=221024972067&amp;proxyReferer=https:%2F%2Fwww.google.com%2F">Linux에서 DISK I/O 사용량 확인</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlfk0038k78o8z667krx.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ckf3rmlfk0038k78o8z667krx.html" class="post-title-link" itemprop="url">ceph 마스터 하기</a>
         </h2>
 
         <div class="post-meta">
@@ -306,7 +413,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla82002n9e8ohfcbcnfz.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlf6002gk78oe0zg61s6.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -323,7 +430,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla82002n9e8ohfcbcnfz.html" class="post-title-link" itemprop="url">우분투에서 xfreerdp 를 이용한 원격 데스크탑 연결</a>
+            <a href="/ckf3rmlf6002gk78oe0zg61s6.html" class="post-title-link" itemprop="url">우분투에서 xfreerdp 를 이용한 원격 데스크탑 연결</a>
         </h2>
 
         <div class="post-meta">
@@ -391,7 +498,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla81002i9e8ofcs5daf8.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlf9002ok78oc0vr9b4z.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -408,7 +515,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla81002i9e8ofcs5daf8.html" class="post-title-link" itemprop="url">몽고디비 덤프 v4.4</a>
+            <a href="/ckf3rmlf9002ok78oc0vr9b4z.html" class="post-title-link" itemprop="url">몽고디비 덤프 v4.4</a>
         </h2>
 
         <div class="post-meta">
@@ -474,7 +581,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla8g00349e8ocmcdb6jk.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlfm003ak78oaqwe063g.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -491,7 +598,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla8g00349e8ocmcdb6jk.html" class="post-title-link" itemprop="url">자연어 처리와 컴퓨터 언어학</a>
+            <a href="/ckf3rmlfm003ak78oaqwe063g.html" class="post-title-link" itemprop="url">자연어 처리와 컴퓨터 언어학</a>
         </h2>
 
         <div class="post-meta">
@@ -645,7 +752,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla7z002f9e8ofcet755p.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlf7002jk78oa2th4h5y.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -662,7 +769,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla7z002f9e8ofcet755p.html" class="post-title-link" itemprop="url">.netrc를 이용한 curl 인증 정보 저장</a>
+            <a href="/ckf3rmlf7002jk78oa2th4h5y.html" class="post-title-link" itemprop="url">.netrc를 이용한 curl 인증 정보 저장</a>
         </h2>
 
         <div class="post-meta">
@@ -724,7 +831,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla72000w9e8o8zom7q5u.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmle3000qk78o5h0a92b4.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -741,7 +848,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla72000w9e8o8zom7q5u.html" class="post-title-link" itemprop="url">nexus3 설정</a>
+            <a href="/ckf3rmle3000qk78o5h0a92b4.html" class="post-title-link" itemprop="url">nexus3 설정</a>
         </h2>
 
         <div class="post-meta">
@@ -943,7 +1050,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla83002p9e8o1wq5eiuz.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlf4002ck78o78x7d0ny.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -960,7 +1067,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla83002p9e8o1wq5eiuz.html" class="post-title-link" itemprop="url">OpenNMT Server API Sample</a>
+            <a href="/ckf3rmlf4002ck78o78x7d0ny.html" class="post-title-link" itemprop="url">OpenNMT Server API Sample</a>
         </h2>
 
         <div class="post-meta">
@@ -1025,7 +1132,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla7y002b9e8o1813h9sv.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlf3002bk78ohtj73vm0.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1042,7 +1149,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla7y002b9e8o1813h9sv.html" class="post-title-link" itemprop="url">git commit 기반 docker image 버전 관리</a>
+            <a href="/ckf3rmlf3002bk78ohtj73vm0.html" class="post-title-link" itemprop="url">git commit 기반 docker image 버전 관리</a>
         </h2>
 
         <div class="post-meta">
@@ -1106,7 +1213,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla7v00249e8o67ulf9vp.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlf10026k78o2n9j9213.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1123,7 +1230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla7v00249e8o67ulf9vp.html" class="post-title-link" itemprop="url">Elasticsearch 초기 암호 설정 방법</a>
+            <a href="/ckf3rmlf10026k78o2n9j9213.html" class="post-title-link" itemprop="url">Elasticsearch 초기 암호 설정 방법</a>
         </h2>
 
         <div class="post-meta">
@@ -1166,102 +1273,6 @@
 <h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-passwords.html">elasticsearch setup passwords</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla6q000q9e8o943377t2.html">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Park Eunjin">
-      <meta itemprop="description" content="적자생존!">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ckf3rla6q000q9e8o943377t2.html" class="post-title-link" itemprop="url">쿠버네티스 네임스페이스 강제 삭제 방법</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-14 15:23:53" itemprop="dateCreated datePublished" datetime="2020-08-14T15:23:53+09:00">2020-08-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Updated at: 2020-08-19 13:13:00" itemprop="dateModified" datetime="2020-08-19T13:13:00+09:00">2020-08-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">쿠버네티스</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/%EB%84%A4%EC%9E%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%A0%9C-%EC%82%AD%EC%A0%9C/" itemprop="url" rel="index"><span itemprop="name">네임스페이스 강제 삭제</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="네임스페이스의-설정을-json-형식으로-가져온다"><a class="markdownIt-Anchor" href="#네임스페이스의-설정을-json-형식으로-가져온다"></a> 네임스페이스의 설정을 json 형식으로 가져온다.</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">K8S_NS=crawler</span><br><span class="line">kubectl get namespace <span class="variable">${K8S_NS}</span> -o json &gt; <span class="variable">${K8S_NS}</span>.json</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="finalizers-값을-삭제한다"><a class="markdownIt-Anchor" href="#finalizers-값을-삭제한다"></a> finalizers 값을 삭제한다.</h2>
-<ul>
-<li>${K8S_NS}.json 에서 finalizers의 kubernetes를 삭제한다.</li>
-</ul>
-<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    <span class="attr">"apiVersion"</span>: <span class="string">"v1"</span>,</span><br><span class="line">    <span class="attr">"kind"</span>: <span class="string">"Namespace"</span>,</span><br><span class="line">    <span class="attr">"spec"</span>: {</span><br><span class="line">        <span class="attr">"finalizers"</span>: [</span><br><span class="line">            <span class="string">"kubernetes"</span></span><br><span class="line">        ]</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="수정된-설정을-적용한다"><a class="markdownIt-Anchor" href="#수정된-설정을-적용한다"></a> 수정된 설정을 적용한다.</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kubectl proxy</span><br><span class="line"></span><br><span class="line">curl -k \</span><br><span class="line">    -X PUT \</span><br><span class="line">    -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">    --data-binary @<span class="variable">${K8S_NS}</span>.json \</span><br><span class="line">    <span class="string">"http://127.0.0.1:8001/api/v1/namespaces/<span class="variable">${K8S_NS}</span>/finalize"</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="jq-를-이용하는-방법"><a class="markdownIt-Anchor" href="#jq-를-이용하는-방법"></a> jq 를 이용하는 방법</h2>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://pipe0502.tistory.com/entry/kubernetes-namespace-delete">kubernetes namespace delete</a></li>
-</ul>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">kubectl proxy </span><br><span class="line"></span><br><span class="line">NAMESPACE=<span class="built_in">test</span> </span><br><span class="line"></span><br><span class="line">kubectl get namespace <span class="variable">${NAMESPACE}</span> -o json \</span><br><span class="line">    | jq <span class="string">'.spec = {"finalizers":[]}'</span> \</span><br><span class="line">    | tee <span class="variable">${NAMESPACE}</span>.json </span><br><span class="line"></span><br><span class="line">curl -k \</span><br><span class="line">    -X PUT \</span><br><span class="line">    -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">    --data-binary @<span class="variable">${NAMESPACE}</span>.json \</span><br><span class="line">    <span class="string">"http://127.0.0.1:8001/api/v1/namespaces/<span class="variable">${NAMESPACE}</span>/finalize"</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.kangwoo.kr/2019/09/09/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EB%84%A4%EC%9E%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4%EA%B0%80-%EC%82%AD%EC%A0%9C%EB%90%98%EC%A7%80-%EC%95%8A%EC%9D%84-%EB%95%8C-%EA%B0%95%EC%A0%9C/">쿠버네티스 네임스페이스 강제 삭제</a></li>
 </ul>
 
       

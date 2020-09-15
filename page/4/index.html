@@ -130,17 +130,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">60</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">61</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">63</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">52</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">53</span></a>
 
   </li>
   </ul>
@@ -185,20 +185,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">태그</span></a>
       </div>
   </nav>
@@ -233,8 +233,8 @@
       
   
   
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rlab400ac9e8odtncebtp.html">
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmldu000dk78o0rnx6t2z.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -251,7 +251,205 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rlab400ac9e8odtncebtp.html" class="post-title-link" itemprop="url">한국어 데이터셋</a>
+            <a href="/ckf3rmldu000dk78o0rnx6t2z.html" class="post-title-link" itemprop="url">쿠버네티스 설치 기록</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-10 14:29:18" itemprop="dateCreated datePublished" datetime="2020-08-10T14:29:18+09:00">2020-08-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-09-15 18:16:24" itemprop="dateModified" datetime="2020-09-15T18:16:24+09:00">2020-09-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/" itemprop="url" rel="index"><span itemprop="name">설치 기록</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">쿠버네티스</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="쿠버네티스-에코-시스템-구성"><a class="markdownIt-Anchor" href="#쿠버네티스-에코-시스템-구성"></a> 쿠버네티스 에코 시스템 구성</h2>
+<ul>
+<li>쿠버네티스 클러스터 구성</li>
+<li>네트워크 플러그인(calico) 설치</li>
+<li>메트릭 서버 플러그인 설치</li>
+<li>nvidia 플러그인 설치</li>
+<li>StorageClass 설치</li>
+</ul>
+<h2 id="선행-작업"><a class="markdownIt-Anchor" href="#선행-작업"></a> 선행 작업</h2>
+<ul>
+<li><a href="/ckdp8y0gb000cojflftba54dc.html">parallel 기반 멀티 노드 관리</a></li>
+</ul>
+<h2 id="iptable-설치"><a class="markdownIt-Anchor" href="#iptable-설치"></a> iptable 설치</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y iptables arptables ebtables</span><br><span class="line"></span><br><span class="line"><span class="comment"># switch to legacy versions</span></span><br><span class="line">sudo update-alternatives --<span class="built_in">set</span> iptables /usr/sbin/iptables-legacy</span><br><span class="line">sudo update-alternatives --<span class="built_in">set</span> ip6tables /usr/sbin/ip6tables-legacy</span><br><span class="line">sudo update-alternatives --<span class="built_in">set</span> arptables /usr/sbin/arptables-legacy</span><br><span class="line">sudo update-alternatives --<span class="built_in">set</span> ebtables /usr/sbin/ebtables-legacy</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="docker-설치"><a class="markdownIt-Anchor" href="#docker-설치"></a> docker 설치</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cls-p cloud <span class="string">"sudo apt install -yq apt-transport-https ca-certificates curl gnupg-agent software-properties-common"</span></span><br><span class="line">cls-p cloud <span class="string">"sudo apt install -yq docker.io"</span></span><br><span class="line"></span><br><span class="line">cls-p cloud <span class="string">"sudo usermod -aG docker \$USER"</span></span><br><span class="line"></span><br><span class="line">cls-p cloud <span class="string">"sudo systemctl start docker"</span></span><br><span class="line">cls-p cloud <span class="string">"sudo systemctl enable docker"</span></span><br><span class="line"></span><br><span class="line">cls-p cloud <span class="string">"docker version"</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="docker-daemonjson-설정"><a class="markdownIt-Anchor" href="#docker-daemonjson-설정"></a> docker daemon.json 설정</h2>
+<ul>
+<li>docker daemon 파일 생성</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">DOCKER_RESITRY=registry:5000</span></span><br><span class="line"></span><br><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;EOF</span> <span class="string">|</span> <span class="string">tee</span> <span class="string">daemon.json</span></span><br><span class="line">{</span><br><span class="line">  <span class="attr">"bip":</span> <span class="string">"10.0.0.1/16"</span>,</span><br><span class="line">  <span class="attr">"exec-opts":</span> [</span><br><span class="line">    <span class="string">"native.cgroupdriver=systemd"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"log-driver":</span> <span class="string">"json-file"</span>,</span><br><span class="line">  <span class="attr">"log-opts":</span> {</span><br><span class="line">    <span class="attr">"max-size":</span> <span class="string">"100m"</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"storage-driver":</span> <span class="string">"overlay2"</span>,</span><br><span class="line">  <span class="attr">"dns":</span> [</span><br><span class="line">    <span class="string">"8.8.8.8"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"hosts":</span> [</span><br><span class="line">    <span class="string">"fd://"</span>,</span><br><span class="line">    <span class="string">"unix:///var/run/docker.sock"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"insecure-registries":</span> [</span><br><span class="line">    <span class="string">"${DOCKER_RESITRY}"</span></span><br><span class="line">  ]</span><br><span class="line">}</span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="string">cat</span> <span class="string">cloud</span> <span class="string">|</span> <span class="string">xargs</span> <span class="string">-I{}</span> <span class="string">scp</span> <span class="string">daemon.json</span> {}<span class="string">:</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="daemonjson-파일-배포"><a class="markdownIt-Anchor" href="#daemonjson-파일-배포"></a> daemon.json 파일 배포</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | tee batch.sh</span><br><span class="line">sudo sed -i.back <span class="string">'s#dockerd -H fd:// #dockerd #'</span> /lib/systemd/system/docker.service</span><br><span class="line">sudo mv daemon.json /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">grep dockerd /lib/systemd/system/docker.service</span><br><span class="line"></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br><span class="line"></span><br><span class="line">route | grep docker0</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat cloud | xargs -I{} scp batch.sh {}:</span><br><span class="line"></span><br><span class="line">cls-p cloud <span class="string">"sh batch.sh &amp;&amp; rm batch.sh"</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="nvidia-docker를-사용하는-경우-runtime-설정을-넣어-준다"><a class="markdownIt-Anchor" href="#nvidia-docker를-사용하는-경우-runtime-설정을-넣어-준다"></a> nvidia-docker를 사용하는 경우 runtime 설정을 넣어 준다.</h2>
+<ul>
+<li>docker 19.03.8 부터는 데몬에 “/usr/bin/dockerd … --add-runtime=nvidia=/usr/bin/nvidia-container-runtime” 이렇게 붙어 있다.</li>
+</ul>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"bip"</span>: <span class="string">"10.0.0.1/16"</span>,</span><br><span class="line">  <span class="attr">"exec-opts"</span>: [</span><br><span class="line">    <span class="string">"native.cgroupdriver=systemd"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"log-driver"</span>: <span class="string">"json-file"</span>,</span><br><span class="line">  <span class="attr">"log-opts"</span>: {</span><br><span class="line">    <span class="attr">"max-size"</span>: <span class="string">"100m"</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"storage-driver"</span>: <span class="string">"overlay2"</span>,</span><br><span class="line">  <span class="attr">"dns"</span>: [</span><br><span class="line">    <span class="string">"8.8.8.8"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"hosts"</span>: [</span><br><span class="line">    <span class="string">"fd://"</span>,</span><br><span class="line">    <span class="string">"unix:///var/run/docker.sock"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"insecure-registries"</span>: [</span><br><span class="line">    <span class="string">"registry:5000"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"default-runtime"</span>: <span class="string">"nvidia"</span>,</span><br><span class="line">  <span class="attr">"runtimes"</span>: {</span><br><span class="line">    <span class="attr">"nvidia"</span>: {</span><br><span class="line">      <span class="attr">"path"</span>: <span class="string">"/usr/bin/nvidia-container-runtime"</span>,</span><br><span class="line">      <span class="attr">"runtimeArgs"</span>: []</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="쿠버네티스-cluster-설치"><a class="markdownIt-Anchor" href="#쿠버네티스-cluster-설치"></a> 쿠버네티스 cluster 설치</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://vitux.com/install-and-deploy-kubernetes-on-ubuntu/">install-and-deploy-kubernetes-on-ubuntu</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.linuxtechi.com/install-configure-kubernetes-ubuntu-18-04-ubuntu-18-10/">install-configure-kubernetes-ubuntu-18-04-ubuntu-18-10</a></li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/">install-kubeadm</a></li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/">create-cluster-kubeadm</a></li>
+</ul>
+<h3 id="사전-설치"><a class="markdownIt-Anchor" href="#사전-설치"></a> 사전 설치</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | tee kubernetes.list</span><br><span class="line">deb https://apt.kubernetes.io/ kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF | tee k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF | tee apt-setup.sh</span><br><span class="line">sudo mv k8s.conf /etc/sysctl.d/k8s.conf</span><br><span class="line"></span><br><span class="line">curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo mv kubernetes.list /etc/apt/sources.list.d/kubernetes.list</span><br><span class="line"></span><br><span class="line">sudo swapoff -a</span><br><span class="line">sudo sysctl --system</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat cloud | xargs -I{} scp k8s.conf {}:</span><br><span class="line">cat cloud | xargs -I{} scp kubernetes.list {}:</span><br><span class="line">cat cloud | xargs -I{} scp apt-setup.sh {}:</span><br><span class="line"></span><br><span class="line">cls-p cloud <span class="string">"sh apt-setup.sh &amp;&amp; rm apt-setup.sh"</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="쿠버네티스-패키지-정보-확인"><a class="markdownIt-Anchor" href="#쿠버네티스-패키지-정보-확인"></a> 쿠버네티스 패키지 정보 확인</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">❯ apt-cache madison kubeadm | head -n 3</span><br><span class="line">   kubeadm |  1.19.0-00 | https://apt.kubernetes.io kubernetes-xenial/main amd64 Packages</span><br><span class="line">   kubeadm |  1.18.8-00 | https://apt.kubernetes.io kubernetes-xenial/main amd64 Packages</span><br><span class="line">   kubeadm |  1.18.6-00 | https://apt.kubernetes.io kubernetes-xenial/main amd64 Packages</span><br><span class="line">   kubeadm |  1.18.5-00 | https://apt.kubernetes.io kubernetes-xenial/main amd64 Packages</span><br><span class="line">   kubeadm |  1.18.4-01 | https://apt.kubernetes.io kubernetes-xenial/main amd64 Packages</span><br><span class="line"> </span><br><span class="line">❯ apt-cache policy kubeadm | head -n 6</span><br><span class="line">kubeadm:</span><br><span class="line">  Installed: 1.18.5-00</span><br><span class="line">  Candidate: 1.19.0-00</span><br><span class="line">  Version table:</span><br><span class="line">     1.19.0-00 500</span><br><span class="line">        500 https://apt.kubernetes.io kubernetes-xenial/main amd64 Packages</span><br><span class="line">     1.18.8-00 500</span><br><span class="line">        500 https://apt.kubernetes.io kubernetes-xenial/main amd64 Packages</span><br><span class="line">     1.18.6-00 500</span><br><span class="line">        500 https://apt.kubernetes.io kubernetes-xenial/main amd64 Packages</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="쿠버네티스-설치"><a class="markdownIt-Anchor" href="#쿠버네티스-설치"></a> 쿠버네티스 설치</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | tee batch.sh</span><br><span class="line">sudo apt update -yq</span><br><span class="line"></span><br><span class="line">apt-cache madison kubeadm | head -n 3</span><br><span class="line"></span><br><span class="line">apt-cache policy kubeadm | head -n 6</span><br><span class="line"></span><br><span class="line">sudo apt install -y apt-transport-https curl</span><br><span class="line">sudo apt install -y kubelet kubeadm kubectl</span><br><span class="line"></span><br><span class="line">sudo apt-mark hold docker kubelet kubeadm kubectl</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat cloud | xargs -I{} scp batch.sh {}:</span><br><span class="line"></span><br><span class="line">cls-p cloud <span class="string">"sh batch.sh &amp;&amp; rm batch.sh"</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="쿠버네티스-cluster-초기화"><a class="markdownIt-Anchor" href="#쿠버네티스-cluster-초기화"></a> 쿠버네티스 cluster 초기화</h2>
+<p>외부 DNS나 IP로 접근을 원할 경우 ‘–apiserver-cert-extra-sans’ 옵션을 사용한다.</p>
+<blockquote>
+<p>–apiserver-cert-extra-sans는 추가적으로 인증에 사용할 IP 주소. 외부에서 쿠버네티스 클러스터에 접근할 수 있는 편이 관리 측면에서 월등하게 편리하니, master의 퍼블릭 IP를 기입한다.</p>
+</blockquote>
+<ul>
+<li>참고
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.dudaji.com/kubernetes/2020/04/08/add-ip-to-kube-api-cert.html">GCE에 설치한 쿠버네티스 클러스터를 내 로컬 kubectl에서</a></li>
+<li><a target="_blank" rel="noopener" href="https://kycfeel.github.io/2018/10/14/%EC%8A%A4%EC%8A%A4%EB%A1%9C-Kubernetes-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0/">스스로 Kubernetes 클러스터 구축하기</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">K8S_MASTER_IP=10.10.0.2</span><br><span class="line"></span><br><span class="line">POD_CIDR=10.1.0.0/16 </span><br><span class="line">SERVICE_CIDR=10.2.0.0/16</span><br><span class="line"></span><br><span class="line">K8S_EXTRA_SANS=<span class="string">'--apiserver-cert-extra-sans my-dns.com,my-dns2.com'</span></span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"sudo kubeadm init --pod-network-cidr=<span class="variable">${POD_CIDR}</span> --service-cidr <span class="variable">${SERVICE_CIDR}</span> <span class="variable">${K8S_EXTRA_SANS}</span>"</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF | tee batch.sh</span><br><span class="line">mkdir -p \<span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf \<span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) \<span class="variable">$HOME</span>/.kube/config</span><br><span class="line"></span><br><span class="line">sudo chown \<span class="variable">$UID</span> \<span class="variable">$HOME</span>/.kube/config</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat cloud-m | xargs -I{} scp batch.sh {}:</span><br><span class="line"></span><br><span class="line">cls-p cloud-m <span class="string">"sh batch.sh &amp;&amp; rm batch.sh"</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cls cloud-w <span class="string">"sudo kubeadm join <span class="variable">${K8S_MASTER_IP}</span>:6443 --token ***** --discovery-token-ca-cert-hash *****"</span></span><br><span class="line"></span><br><span class="line">cls-p cloud-m <span class="string">"kubectl get nodes -o wide"</span></span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"cat .kube/config"</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="쿠버네티스-마스터-노드-스케쥴링"><a class="markdownIt-Anchor" href="#쿠버네티스-마스터-노드-스케쥴링"></a> 쿠버네티스 마스터 노드 스케쥴링</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cls-p cloud-m <span class="string">"kubectl taint nodes --all node-role.kubernetes.io/master-"</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="kubeconfig-다운로드"><a class="markdownIt-Anchor" href="#kubeconfig-다운로드"></a> kubeconfig 다운로드</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat cloud-m | xargs -I{} scp {}:.kube/config kubeconfig.{}</span><br><span class="line"></span><br><span class="line">cat cloud-m | xargs -I{} kubectl --kubeconfig kubeconfig.{} get nodes -o wide</span><br><span class="line"></span><br><span class="line"><span class="comment"># ~/.kube/config 에 병합</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="쿠버네티스-네트워크-설치"><a class="markdownIt-Anchor" href="#쿠버네티스-네트워크-설치"></a> 쿠버네티스 네트워크 설치</h2>
+<ul>
+<li>calico 의 디폴트 IP 범위(192.168.0.0/16) 를 10.1.0.0/16 (kubeadm의 pod-network-cidr) 으로 변경</li>
+<li>calico-node daemon set에서 <a target="_blank" rel="noopener" href="http://beta.kubernetes.io/os=linux">beta.kubernetes.io/os=linux</a> 레이블을 사용함</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#curl -LO https://docs.projectcalico.org/v3.9/manifests/calico.yaml</span></span><br><span class="line">curl https://docs.projectcalico.org/manifests/calico.yaml -O</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.16 에서는 주석처리 되어 있다.</span></span><br><span class="line"><span class="comment">#sed -i -e "s#192.168.0.0/16#10.1.0.0/16#g" calico.yaml</span></span><br><span class="line"></span><br><span class="line">cat cloud-m | xargs -I{} scp calico.yaml {}:</span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"kubectl apply -f calico.yaml"</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="메트릭-서버-설치"><a class="markdownIt-Anchor" href="#메트릭-서버-설치"></a> 메트릭 서버 설치</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kubernetes-sigs/metrics-server">metrics server</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml </span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>이슈: 아래와 같이 args 를 수정한다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kubernetes-sigs/metrics-server/issues/300">kubectl top pods result in error #300</a></li>
+</ul>
+</li>
+<li>
+<p>args: 에 두줄을 추가한다.</p>
+<ul>
+<li>–kubelet-insecure-tls=true</li>
+<li>–kubelet-preferred-address-types=InternalIP</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">metrics-server</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">k8s.gcr.io/metrics-server/metrics-server:v0.3.7</span></span><br><span class="line">        <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">        <span class="attr">args:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">--cert-dir=/tmp</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">--secure-port=4443</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">--kubelet-insecure-tls=true</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="메트릭-서버-실행"><a class="markdownIt-Anchor" href="#메트릭-서버-실행"></a> 메트릭 서버 실행</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat cloud-m | xargs -I{} scp components.yaml {}:</span><br><span class="line"></span><br><span class="line">cls-p cloud-m <span class="string">"kubectl apply -f components.yaml"</span></span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"kubectl top nodes"</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="nvidia-plugin-설치"><a class="markdownIt-Anchor" href="#nvidia-plugin-설치"></a> nvidia plugin 설치</h2>
+<ul>
+<li>nvidia-docker 설치 후 플러그인 설치
+<ul>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/">scheduling-gpus</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply \</span><br><span class="line">    -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/1.0.0-beta4/nvidia-device-plugin.yml</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="gpu-테스트-하기"><a class="markdownIt-Anchor" href="#gpu-테스트-하기"></a> GPU 테스트 하기</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | kubectl apply -f -</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  labels:</span><br><span class="line">    app: tf-gpu-jupyter</span><br><span class="line">  name: tf-gpu-jupyter</span><br><span class="line">  namespace: default</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: tf-gpu-jupyter</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: tf-gpu-jupyter</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - image: tensorflow/tensorflow:2.1.0-gpu-py3-jupyter</span><br><span class="line">        imagePullPolicy: IfNotPresent</span><br><span class="line">        name: tf-gpu-jupyter</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 8888</span><br><span class="line">          protocol: TCP</span><br><span class="line">        resources:</span><br><span class="line">          limits:</span><br><span class="line">            nvidia.com/gpu: <span class="string">"1"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl get pod -l app=tf-gpu-jupyter</span><br><span class="line"></span><br><span class="line">kubectl logs -l app=tf-gpu-jupyter</span><br><span class="line"></span><br><span class="line">kubectl port-forward pod/tf-gpu-jupyter-69b7644cc6-h9n44 8888:8888</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="python-gpu-테스트"><a class="markdownIt-Anchor" href="#python-gpu-테스트"></a> python GPU 테스트</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import, division, print_function, unicode_literals</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">print(<span class="string">"Num GPUs Available: "</span>, len(tf.config.experimental.list_physical_devices(<span class="string">'GPU'</span>)))</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="파드-삭제"><a class="markdownIt-Anchor" href="#파드-삭제"></a> 파드 삭제</h3>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete deploy tf-gpu-jupyter</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="노드-확장"><a class="markdownIt-Anchor" href="#노드-확장"></a> 노드 확장</h2>
+<ul>
+<li>참고: <a target="_blank" rel="noopener" href="https://kubernetes.io/ko/docs/tasks/administer-cluster/kubeadm/adding-windows-nodes/">노드 추가</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">❯ sudo kubeadm token list</span><br><span class="line"></span><br><span class="line">❯ sudo kubeadm token create --<span class="built_in">print</span>-join-command</span><br><span class="line">kubeadm join MASTER_IP:6443 --token ****  --discovery-token-ca-cert-hash ****</span><br><span class="line"></span><br><span class="line">❯ sudo kubeadm upgrade node</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="노드-축소"><a class="markdownIt-Anchor" href="#노드-축소"></a> 노드 축소</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kubectl drain &lt;node name&gt;</span><br><span class="line"></span><br><span class="line">kubectl uncordon &lt;node name&gt;</span><br><span class="line"></span><br><span class="line">kubectl delete node &lt;node name&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="버전-업그레이드"><a class="markdownIt-Anchor" href="#버전-업그레이드"></a> 버전 업그레이드</h2>
+<ul>
+<li>참고: <a target="_blank" rel="noopener" href="https://kubernetes.io/ko/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/">kubeadm-upgrade</a></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cls-p cloud-m <span class="string">"sudo apt update &amp;&amp; sudo apt-cache madison kubeadm"</span></span><br><span class="line"></span><br><span class="line">cls-p cloud-m <span class="string">"sudo apt update &amp;&amp; sudo apt install -y --allow-change-held-packages kubeadm"</span></span><br><span class="line"></span><br><span class="line">kubeadm version</span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"sudo kubeadm upgrade plan"</span></span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"sudo kubeadm upgrade apply -y v1.19.0"</span></span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"kubectl get nodes -o wide"</span></span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"sudo kubeadm upgrade node"</span></span><br><span class="line"></span><br><span class="line">cls-p cloud <span class="string">"sudo apt update &amp;&amp; sudo apt install -y --allow-change-held-packages kubelet kubectl"</span></span><br><span class="line"></span><br><span class="line">cls cloud-m <span class="string">"sudo kubeadm upgrade node"</span></span><br><span class="line"></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart kubelet</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.kangwoo.kr/2020/02/17/pc%EC%97%90-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-2%EB%B6%80-kubernetes-nvidia-device-plugin-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/">pc에-kubeflow-설치하기-2부-kubernetes-nvidia-device-plugin-설치하기, 지구별 여행자</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlic00apk78o8yk5dvkd.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ckf3rmlic00apk78o8yk5dvkd.html" class="post-title-link" itemprop="url">한국어 데이터셋</a>
         </h2>
 
         <div class="post-meta">
@@ -996,7 +1194,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rlaby00as9e8o7xie9wxy.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlj800b5k78ohkij2zk1.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1013,7 +1211,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rlaby00as9e8o7xie9wxy.html" class="post-title-link" itemprop="url">embadding</a>
+            <a href="/ckf3rmlj800b5k78ohkij2zk1.html" class="post-title-link" itemprop="url">embadding</a>
         </h2>
 
         <div class="post-meta">
@@ -1382,7 +1580,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rlab300aa9e8o0wivearu.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlib00ank78o5lk37069.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1399,7 +1597,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rlab300aa9e8o0wivearu.html" class="post-title-link" itemprop="url">bookmarks</a>
+            <a href="/ckf3rmlib00ank78o5lk37069.html" class="post-title-link" itemprop="url">bookmarks</a>
         </h2>
 
         <div class="post-meta">
@@ -1793,7 +1991,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla6000089e8o2w0l1lef.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmldd0003k78obpon1h4r.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1810,7 +2008,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla6000089e8o2w0l1lef.html" class="post-title-link" itemprop="url">Hexo 설치 이력</a>
+            <a href="/ckf3rmldd0003k78obpon1h4r.html" class="post-title-link" itemprop="url">Hexo 설치 이력</a>
         </h2>
 
         <div class="post-meta">
@@ -1903,7 +2101,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla8e00319e8ob6ih6kf6.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlfj0035k78oaovh14u5.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1920,7 +2118,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla8e00319e8ob6ih6kf6.html" class="post-title-link" itemprop="url">Kubeflow</a>
+            <a href="/ckf3rmlfj0035k78oaovh14u5.html" class="post-title-link" itemprop="url">Kubeflow</a>
         </h2>
 
         <div class="post-meta">
@@ -2014,7 +2212,7 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="infra">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla5n00039e8o61882652.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmldl0008k78oguf468qo.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2031,7 +2229,7 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla5n00039e8o61882652.html" class="post-title-link" itemprop="url">ubuntu cuda 설치</a>
+            <a href="/ckf3rmldl0008k78oguf468qo.html" class="post-title-link" itemprop="url">ubuntu cuda 설치</a>
         </h2>
 
         <div class="post-meta">
@@ -2116,7 +2314,7 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="study">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rlab200a99e8o1i8s2723.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlia00amk78o2ffie5zw.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2133,7 +2331,7 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rlab200a99e8o1i8s2723.html" class="post-title-link" itemprop="url">helm</a>
+            <a href="/ckf3rmlia00amk78o2ffie5zw.html" class="post-title-link" itemprop="url">helm</a>
         </h2>
 
         <div class="post-meta">
@@ -2261,7 +2459,7 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla7w00299e8ocsyf9cd9.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmley0020k78ohuew5svo.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2278,7 +2476,7 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla7w00299e8ocsyf9cd9.html" class="post-title-link" itemprop="url">Linux 계정 생성, SSH key pair 생성</a>
+            <a href="/ckf3rmley0020k78ohuew5svo.html" class="post-title-link" itemprop="url">Linux 계정 생성, SSH key pair 생성</a>
         </h2>
 
         <div class="post-meta">
@@ -2357,7 +2555,7 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla7r001v9e8o6ygv5p6r.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlf00024k78o7q9ze5ua.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2374,7 +2572,7 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla7r001v9e8o6ygv5p6r.html" class="post-title-link" itemprop="url">RAID 디스크 초기화 방법</a>
+            <a href="/ckf3rmlf00024k78o7q9ze5ua.html" class="post-title-link" itemprop="url">RAID 디스크 초기화 방법</a>
         </h2>
 
         <div class="post-meta">
@@ -2418,99 +2616,6 @@ Instructions for installing Kubeflow with kfctl_istio_dex.yaml config</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">sudo gdisk /dev/sdc</span><br><span class="line"><span class="comment"># GPT fdisk (gdisk) version 1.0.3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Partition table scan:</span></span><br><span class="line"><span class="comment">#   MBR: protective</span></span><br><span class="line"><span class="comment">#   BSD: not present</span></span><br><span class="line"><span class="comment">#   APM: not present</span></span><br><span class="line"><span class="comment">#   GPT: present</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Found valid GPT with protective MBR; using GPT.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Command (? for help): x</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Expert command (? for help): z</span></span><br><span class="line"><span class="comment"># About to wipe out GPT on /dev/sdc. Proceed? (Y/N): Y</span></span><br><span class="line"><span class="comment"># Warning: The kernel is still using the old partition table.</span></span><br><span class="line"><span class="comment"># The new table will be used at the next reboot or after you</span></span><br><span class="line"><span class="comment"># run partprobe(8) or kpartx(8)</span></span><br><span class="line"><span class="comment"># GPT data structures destroyed! You may now partition the disk using fdisk or</span></span><br><span class="line"><span class="comment"># other utilities.</span></span><br><span class="line"><span class="comment"># Blank out MBR? (Y/N): Y</span></span><br></pre></td></tr></tbody></table></figure>
 <h2 id="remove-mdadm-raid-array-삭제"><a class="markdownIt-Anchor" href="#remove-mdadm-raid-array-삭제"></a> Remove Mdadm RAID Array 삭제</h2>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo mdadm --stop /dev/md0</span><br><span class="line">sudo mdadm --remove /dev/md127</span><br><span class="line"></span><br><span class="line">sudo mdadm --zero-superblock /dev/sdb1 /dev/sdc1 /dev/sdd1</span><br><span class="line"></span><br><span class="line">sudo rm /etc/mdadm/mdadm.conf</span><br><span class="line"></span><br><span class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=/dev/sdb</span><br><span class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=/dev/sdc</span><br><span class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=/dev/sdd</span><br></pre></td></tr></tbody></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla7s001y9e8o1q0ia7j9.html">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Park Eunjin">
-      <meta itemprop="description" content="적자생존!">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ckf3rla7s001y9e8o1q0ia7j9.html" class="post-title-link" itemprop="url">리눅스민트 20.04에 chromium 설치 방법</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-07-07 14:40:28" itemprop="dateCreated datePublished" datetime="2020-07-07T14:40:28+09:00">2020-07-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Updated at: 2020-08-14 10:21:24" itemprop="dateModified" datetime="2020-08-14T10:21:24+09:00">2020-08-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/" itemprop="url" rel="index"><span itemprop="name">설치 기록</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/%EC%84%A4%EC%B9%98-%EA%B8%B0%EB%A1%9D/chromium/" itemprop="url" rel="index"><span itemprop="name">chromium</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="linux-mint-2004-에서-chromium-설치"><a class="markdownIt-Anchor" href="#linux-mint-2004-에서-chromium-설치"></a> Linux Mint 20.04 에서 chromium 설치</h2>
-<h3 id="데비안-stable-저장소-등록"><a class="markdownIt-Anchor" href="#데비안-stable-저장소-등록"></a> 데비안 stable 저장소 등록</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | sudo tee /etc/apt/sources.list.d/debian.list</span><br><span class="line">deb http://deb.debian.org/debian/ stable main <span class="comment">#Debian stable</span></span><br><span class="line">deb http://deb.debian.org/debian/ stable-updates main <span class="comment">#Debian updates</span></span><br><span class="line">deb http://deb.debian.org/debian-security stable/updates main <span class="comment">#Debian security updates</span></span><br><span class="line">EOF</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="데비안-저장소에서-사용할-패키지를-지정한다"><a class="markdownIt-Anchor" href="#데비안-저장소에서-사용할-패키지를-지정한다"></a> 데비안 저장소에서 사용할 패키지를 지정한다.</h3>
-<ul>
-<li>만약 지정하지 않으면 최신버전의 데비안 패키지를 사용하게 된다.</li>
-</ul>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF | sudo tee /etc/apt/preferences.d/debian.pref</span><br><span class="line">Package: *</span><br><span class="line">Pin: origin <span class="string">"deb.debian.org"</span></span><br><span class="line">Pin-Priority: -10</span><br><span class="line"></span><br><span class="line">Package: chromium* libvpx5 libjpeg62-turbo</span><br><span class="line">Pin: origin <span class="string">"deb.debian.org"</span></span><br><span class="line">Pin-Priority: 999</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo apt install debian-archive-keyring  </span><br><span class="line">sudo apt-key add /usr/share/keyrings/debian-archive-keyring.gpg</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="chromium-설치"><a class="markdownIt-Anchor" href="#chromium-설치"></a> chromium 설치</h3>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line"></span><br><span class="line">apt-cache policy chromium linux-base</span><br><span class="line"></span><br><span class="line">sudo apt install chromium</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="참고"><a class="markdownIt-Anchor" href="#참고"></a> 참고</h2>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://shevchuk.co/notes/2019/12/13/install-chromium-on-ubuntu-1910-from-debian-instead-of-snap">Install Chromium on Ubuntu 19.10+ from Debian instead of snap</a></li>
-<li><a target="_blank" rel="noopener" href="https://linuxmint-user-guide.readthedocs.io/en/latest/chromium.html">Chromium</a></li>
-</ul>
 
       
     </div>

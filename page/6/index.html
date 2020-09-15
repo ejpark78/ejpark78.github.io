@@ -130,17 +130,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">59</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그<span class="badge">60</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">61</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리<span class="badge">63</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">52</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브<span class="badge">53</span></a>
 
   </li>
   </ul>
@@ -185,20 +185,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">태그</span></a>
       </div>
   </nav>
@@ -234,7 +234,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla7b00159e8oavve005p.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlel001ak78o8odshaj6.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -251,7 +251,125 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla7b00159e8oavve005p.html" class="post-title-link" itemprop="url">리눅스에서 띄어쓰기가 있는 파일명 처리 방법</a>
+            <a href="/ckf3rmlel001ak78o8odshaj6.html" class="post-title-link" itemprop="url">tmux에 CPU/GPU/Memory 사용량 표시 방법</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2017-11-03 10:46:28" itemprop="dateCreated datePublished" datetime="2017-11-03T10:46:28+09:00">2017-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-18 20:53:56" itemprop="dateModified" datetime="2020-08-18T20:53:56+09:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EB%A6%AC%EB%88%85%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">리눅스</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/%EB%A6%AC%EB%88%85%EC%8A%A4/tmux/" itemprop="url" rel="index"><span itemprop="name">tmux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="개요"><a class="markdownIt-Anchor" href="#개요"></a> 개요</h2>
+<ul>
+<li>
+<p>tmux 는 screen 과 기능이 유사한 유틸이다.</p>
+</li>
+<li>
+<p>처음에는 screen 을 주로 쓰다가 인터넷 누군가의 추천으로  tmux 를 사용하기 시작했다.</p>
+</li>
+<li>
+<p>tmux 가 screen 에 비해서 기능이 100배쯤 많다.</p>
+</li>
+<li>
+<p>그중 아래와 같이 CPU와 GPU 점유율 및 메모리 사용량을 표시해 주는 기능을 넣을 수 있다.</p>
+</li>
+</ul>
+<p><img src="/image/tmux/tmux.png" alt="tmux"></p>
+<h2 id="단축키-변경"><a class="markdownIt-Anchor" href="#단축키-변경"></a> 단축키 변경:</h2>
+<ul>
+<li>
+<p>tmux 의 단점중 하나가 창 생성 버튼이 Ctrl+B 인 것이다.</p>
+</li>
+<li>
+<p>이걸 screen 처럼 Ctrl+A 로 변경한다. ~/.tmux.conf 에서 변경한다. (bind-key a send-prefix 부분 참조)</p>
+</li>
+<li>
+<p>참고: <a target="_blank" rel="noopener" href="https://junho85.pe.kr/320">tmux 설정, 사용법</a></p>
+</li>
+</ul>
+<h2 id="gpu-및-cpu-정유율-표시"><a class="markdownIt-Anchor" href="#gpu-및-cpu-정유율-표시"></a> GPU 및 CPU 정유율 표시:</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="http://galadriel/ejpark/utils/tree/master/tmux">http://galadriel/ejpark/utils/tree/master/tmux</a> 에서 tmux-mem-cpu-load 와 tmux-status.sh를 다운로드 받아서 PATH  위치에 복사한다. 예) /usr/local/sbin 같은 경로 (?)</p>
+</li>
+<li>
+<p>참고: <a target="_blank" rel="noopener" href="https://github.com/thewtex/tmux-mem-cpu-load">tmux-mem-cpu-load</a></p>
+</li>
+<li>
+<p>참고: <a target="_blank" rel="noopener" href="https://edykim.com/ko/post/tmux-introductory-series-summary/">tmux 입문자 시리즈 요약</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlek0018k78o3jfz31ss.html">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Park Eunjin">
+      <meta itemprop="description" content="적자생존!">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="오늘은 뭘 배우셨나요?">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ckf3rmlek0018k78o3jfz31ss.html" class="post-title-link" itemprop="url">리눅스에서 띄어쓰기가 있는 파일명 처리 방법</a>
         </h2>
 
         <div class="post-meta">
@@ -320,7 +438,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="linux">
-    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rla7e00189e8of2ii77mc.html">
+    <link itemprop="mainEntityOfPage" href="https://ejpark78.github.io/ckf3rmlei0015k78o6k6egt5f.html">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -337,7 +455,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ckf3rla7e00189e8of2ii77mc.html" class="post-title-link" itemprop="url">msword (.doc .docx), excel (.xls .xlsx) 텍스트 변환 방법</a>
+            <a href="/ckf3rmlei0015k78o6k6egt5f.html" class="post-title-link" itemprop="url">msword (.doc .docx), excel (.xls .xlsx) 텍스트 변환 방법</a>
         </h2>
 
         <div class="post-meta">
